@@ -1,0 +1,157 @@
+Liste des Fonctions autorisé : 
+
+
+
+
+memset
+	La fonction memset() remplit les n premiers octets de la zone mémoire pointée par s avec l'octet c.
+
+printf
+	Fonction pour ecrire
+
+malloc
+	alloue de la mémoire
+
+free
+	libère de la mémoire
+
+write
+	Fonction pour ecrire
+
+usleep
+	Fonction qui suspend l'execution d'appel de thread 
+
+gettimeofday
+	la fonction permet de lire ou programmer l'heure ainsi que le fuseau horaire (timezone).
+	L'argument tv est une structure timeval (décrite dans <sys/time.h>)
+
+	struct timeval 
+	{
+   		time_t      	tv_sec;  		/* secondes */
+    		suseconds_t 	tv_usec; 		/* microsecondes */
+	};
+
+	et donne le nombre de secondes et microsecondes écoulées depuis le 1er janvier 1970
+	L'argument tz est une structure timezone composée ainsi : 
+
+	struct timezone 
+	{
+   		int 	tz_minuteswest; 		/* minutes à l'ouest de Greenwich  */
+    		int 	tz_dsttime;     		/* type de changement horaire      */
+	};
+
+	Si soit tv soit tz est NULL, la structure correspondante n'est ni remplie ni renvoyée. 
+
+<----------------------------------------------------thread------------------------------------------------------>
+Les threads (ou fils d’exécution) en langage C permettent d’exécuter plusieurs tâches simultanément. Voici un aperçu rapide sur les threads en C, suivi d’exemples :
+
+    Introduction aux Threads:
+        Les threads sont des unités d’exécution légères qui partagent le même espace d’adressage.
+        Ils permettent d’accomplir des tâches en parallèle, améliorant ainsi l’efficacité des programmes.
+        En C, vous pouvez utiliser la bibliothèque pthread pour gérer les threads.
+
+    Création de Threads:
+        Utilisez la fonction pthread_create pour créer un nouveau thread.
+        Exemple :
+	```
+	#include <stdio.h>
+	#include <pthread.h>
+
+	void	*myThreadFunction(void *arg) 
+	{
+		printf("Hello from a thread!\n");
+		return NULL;
+	}
+
+	int main() 
+	{
+		pthread_t myThread;
+		pthread_create(&myThread, NULL, myThreadFunction, NULL);
+		pthread_join(myThread, NULL);  
+		return 0;
+	}
+	```
+
+	Synchronisation des Threads avec Mutex:
+
+   	Les mutex (verrous) permettent d’éviter les conflits d’accès aux ressources partagées.
+    	Exemple :
+
+	```
+	#include <stdio.h>
+	#include <pthread.h>
+
+	int sharedValue = 0;
+	pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+
+	void* incrementThread(void* arg) 
+	{
+		for (int i = 0; i < 1000; ++i) *
+		{
+			pthread_mutex_lock(&mutex);
+			sharedValue++;
+			pthread_mutex_unlock(&mutex);
+		}
+	return NULL;
+	}
+
+	int main() 
+	{
+		pthread_t thread1, thread2;
+		pthread_create(&thread1, NULL, incrementThread, NULL);
+		pthread_create(&thread2, NULL, incrementThread, NULL);
+		pthread_join(thread1, NULL);
+		pthread_join(thread2, NULL);
+		printf("Shared value: %d\n", sharedValue);
+		return 0;
+	}
+
+
+
+
+
+<----------------------------------------------------thread------------------------------------------------------>
+pthread_create
+	La fonction start un nouveau thread dans l'appel de processus
+
+pthread_detach
+	Permet de detacher le thread, donc une fois les actions faites, tous est free
+
+pthread_join
+	Permet de faire les thread les 1 apres les autres et c'est ajouter au thread(main)
+
+pthread_mutex_init
+	créer la porte d'acces a la maison 
+
+pthread_mutex_destroy
+	Détruit la porte de la maison 
+
+pthread_mutex_lock
+	vérouille la porte de la maison 
+
+pthread_mutex_unlock
+	déverouille la porte de la maison 
+
+
+<---------------------------------------------------------------------------------------------------------------->
+
+Si tous les philo ont 1 fouchette --> KO.
+
+
+Politique :
+0 ou 2 fourchette, janais une.
+Mutex -> 
+
+while (1) pense , dormir
+
+si fourchette G et D libre -> reservation
+manger
+liberer fourchette gauche et droite
+
+ordonner les fourchette en taille pour eviter famine si toutes les ressources utilisees en meme temps
+
+demander 2 fourchettes une apres l'autre (commencant par la + petite )
+
+Thread binaire :
+dispo / pas dispo  : variable fouchette
+
