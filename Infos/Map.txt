@@ -111,6 +111,7 @@ Les threads (ou fils d’exécution) en langage C permettent d’exécuter plusi
 
 
 <----------------------------------------------------thread------------------------------------------------------>
+
 pthread_create
 	La fonction start un nouveau thread dans l'appel de processus
 
@@ -155,3 +156,6 @@ demander 2 fourchettes une apres l'autre (commencant par la + petite )
 Thread binaire :
 dispo / pas dispo  : variable fouchette
 
+
+
+Rcoder usleep pour avoir 100% de precision

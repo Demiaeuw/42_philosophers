@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   00_argument.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/03 15:37:50 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/04 17:34:36 by acabarba         ###   ########.fr       */
+/*   Created: 2024/06/04 15:36:38 by acabarba          #+#    #+#             */
+/*   Updated: 2024/06/04 18:11:34 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/include.h"
+#include "../../include/include.h"
 
-int	main(int ac, char **av)
+void	main_argument(int ac, char **av, t_philo *philo)
 {
-	t_philo	*philo;
-	
-	main_init(&philo);
-	main_argument(ac, av, philo);
-	printf("HelloWorld\n");
-	main_free(philo);
-	return (0);
+	(void)av;
+	if (ac != 5 && ac != 6)
+		main_error(error_argument, philo);
+	forksnbr(ac, av, philo);
+}
+
+void	forksnbr(int ac, char **av, t_philo *philo)
+{
+	check_arg_int(ac, av, philo);
+	philo->forks_nb = ft_atoi(av[1]);
 }

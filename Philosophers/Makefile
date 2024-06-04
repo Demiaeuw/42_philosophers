@@ -2,9 +2,14 @@
 NAME = philosopher
 
 # Fichiers source
-SRCS =	main.c
+SRCS =	main.c\
+	srcs/00_base/00_error.c\
+	srcs/00_base/00_free.c\
+	srcs/00_base/00_init.c\
+	srcs/01_argument/00_argument.c\
+	srcs/01_argument/01_checkint.c
 
-UTILS =	
+UTILS = srcs/utils/ft_atoi.c
 
 
 # Fichiers objets

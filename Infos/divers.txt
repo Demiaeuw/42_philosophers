@@ -1,0 +1,77 @@
+j'ai un soucis avec mon programme en c.
+
+j'ai une fonction qui initialise une structure, et la malloc de sa propre taille 
+
+void	main_init(t_philo *philo)
+{
+	philo = malloc(sizeof(t_philo));
+	philo->test = 0;
+}
+
+
+et j'ai aussi un fonction pour free cette dernière a la fin de mon programme ou en cas d'erreur pour ne pas avoir de leak de mémoire 
+
+void	main_free(t_philo *philo)
+{
+	if (philo)
+		free(philo);
+	return ;
+}
+
+voici mon main 
+
+int	main(int ac, char **av)
+{
+	t_philo	philo;
+	
+	main_init(&philo);
+	main_argument(&philo, ac, av);
+	printf("HelloWorld\n");
+	main_free(&philo);
+	return (0);
+}
+
+ainsi que ma gestion d'erreur 
+
+void	main_error(void (*f)(), t_philo *philo)
+{
+	// (void)philo;
+	f();
+	main_free(philo);
+	exit(0);
+}
+
+void	error_argument(void)
+{
+	printf("\n\n\033[31mERROR\033[0m\n\n");
+	printf("Argument Problem\n\n"
+		"Format : ./philosopher "
+		"\033[34m<number of philosophe>\033[0m "
+		"\033[36m<time to die>\033[0m "
+		"\033[34m<time to eat>\033[0m "
+		"\033[36m<time to sleep>\033[0m "
+		"(optional)\033[34m<number of times each philosopher "
+		"must eat>\033[0m\n\n");
+	return ;
+}
+
+
+mais quand je test le programme, voici le retour que j'ai 
+
+
+c2r4p2% ./philosopher
+
+
+ERROR
+
+Argument Problem
+
+Format : ./philosopher <number of philosophe> <time to die> <time to eat> <time to sleep> (optional)<number of times each philosopher must eat>
+
+free(): invalid pointer
+zsh: IOT instruction (core dumped)  ./philosopher
+
+
+explique moi cette erreur et corrige la 
+
+
