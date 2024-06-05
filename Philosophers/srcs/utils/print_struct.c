@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_struct.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/03 15:37:50 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/05 17:03:17 by acabarba         ###   ########.fr       */
+/*   Created: 2024/06/05 17:00:02 by acabarba          #+#    #+#             */
+/*   Updated: 2024/06/05 17:13:57 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/include.h"
+#include "../../include/include.h"
 
-int	main(int ac, char **av)
+void	print_struct(t_data *data)
 {
-	t_philo	*philo;
-	
-	main_init(&philo);
-	main_argument(ac, av, philo);
-	print_struct(&(*philo));
-	main_free(philo);
-	return (0);
+	printf("fork_nb : %d\n", data->forks_nb);
+	printf("tt_d : %d\n", data->tt_d);
+	printf("tt_e : %d\n", data->tt_e);
+	printf("tt_s : %d\n", data->tt_s);
+	printf("nbreat : %d\n", data->nbreat);
 }

@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00_init.c                                          :+:      :+:    :+:   */
+/*   free00.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/04 15:08:21 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/04 17:42:33 by acabarba         ###   ########.fr       */
+/*   Created: 2024/06/04 15:07:20 by acabarba          #+#    #+#             */
+/*   Updated: 2024/06/05 17:14:10 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/include.h"
 
-void	main_init(t_philo **philo)
+void	main_free(t_data *data)
 {
-	*philo = malloc(sizeof(t_philo));
-	if (*philo == NULL)
-	{
-		exit(EXIT_FAILURE);
-	}
-	(*philo)->forks_nb = 0;
+	if (data)
+		free(data);
+	return ;
 }
