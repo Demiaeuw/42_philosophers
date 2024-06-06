@@ -6,27 +6,27 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:51:03 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/05 17:13:40 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:57:53 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/include.h"
 
-void	check_arg_int(int ac, char **av, t_data *data, int i)
+void	check_arg_int(int ac, char **av, t_data *data, int i, t_philo *philo)
 {
 	(void)ac;
 	if (check_is_numbr(av[i]) == 0 || check_int(av[i]) == 0)
 	{
 		if (i == 1)
-			main_error(error_nb_philo, data);
+			main_error(error_nb_philo, data, philo);
 		if (i == 2)
-			main_error(error_ttd, data);
+			main_error(error_ttd, data, philo);
 		if (i == 3)
-			main_error(error_tte, data);
+			main_error(error_tte, data, philo);
 		if (i == 4)
-			main_error(error_tts, data);
+			main_error(error_tts, data, philo);
 		if (i == 5)
-			main_error(error_nbreat, data);
+			main_error(error_nbreat, data, philo);
 	}
 }
 

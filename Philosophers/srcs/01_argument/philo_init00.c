@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free00.c                                           :+:      :+:    :+:   */
+/*   philo_init00.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/04 15:07:20 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/06 15:52:43 by acabarba         ###   ########.fr       */
+/*   Created: 2024/06/06 14:42:33 by acabarba          #+#    #+#             */
+/*   Updated: 2024/06/06 14:48:37 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/include.h"
 
-void	main_free(t_data *data, t_philo *philo)
+void	philo_init(int ac, char **av, t_data *data)
 {
-	if (data)
-		free(data);
-	if (philo)
-		free(philo);
-	return ;
+	
 }

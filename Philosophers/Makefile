@@ -8,10 +8,12 @@ SRCS =	main.c\
 	srcs/00_base/free00.c\
 	srcs/00_base/init00.c\
 	srcs/01_argument/argument00.c\
-	srcs/01_argument/argument01.c
+	srcs/01_argument/argument01.c\
+	srcs/02_action/eat00.c
 
 UTILS = srcs/utils/ft_atoi.c\
 	srcs/utils/checkint.c\
+	srcs/utils/ft_memset.c\
 	srcs/utils/print_struct.c
 
 

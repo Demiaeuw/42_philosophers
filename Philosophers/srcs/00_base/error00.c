@@ -6,16 +6,16 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 15:03:32 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/05 17:11:28 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:53:20 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/include.h"
 
-void	main_error(void (*f)(), t_data *data)
+void	main_error(void (*f)(), t_data *data, t_philo *philo)
 {
 	f();
-	main_free(data);
+	main_free(data, philo);
 	exit(0);
 }
 
