@@ -19,16 +19,16 @@ typedef struct s_data
 	int		tt_e;
 	int		tt_s;
 	int		nbreat;
+	pthread_mutex_t *forks;
+	pthread_t *threads;
 }	t_data;
 
 typedef struct s_philo
 {
 	int		id_philo;
-	struct timeval start_meal;
-	struct timeval end_meal;
-	struct timeval last_meal;
-	struct timeval start_thinking;
-	struct timeval start_sleeping;
+	t_data	*data;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
 	
 }	t_philo;
 /*			BASE			*/
@@ -45,21 +45,23 @@ void	error_nbreat(void);
 void	main_free(t_data *data, t_philo *philo);
 
 //			INIT
-void	main_init(t_data **data, t_philo **philo);
 void	data_init(t_data **data);
-void	philo_init(t_philo **philo);
+void	philo_init(t_data **data, t_philo **philo);
+void	mutex_init(t_data *data, t_philo *philo);
 
 /*			ARGUMENT		*/
 void	main_argument(int ac, char **av, t_data *data, t_philo *philo);
-void	forksnbr(int ac, char **av, t_data *data);
-void	t_t_d(int ac, char **av, t_data *data);
-void	t_t_e(int ac, char **av, t_data *data);
-void	t_t_s(int ac, char **av, t_data *data);
-void	nbr_eat(int ac, char **av, t_data *data);
+void	forksnbr(int ac, char **av, t_data *data, t_philo *philo);
+void	t_t_d(int ac, char **av, t_data *data, t_philo *philo);
+void	t_t_e(int ac, char **av, t_data *data, t_philo *philo);
+void	t_t_s(int ac, char **av, t_data *data, t_philo *philo);
+void	nbr_eat(int ac, char **av, t_data *data, t_philo *philo);
 
-/*			ACTION			*/
-void	eat(int ac, char **av, t_philo *philo);
+/*			THREAD			*/
+void	init_thread(int ac, char **av, t_data **data, t_philo **philo);
 
+/*			ROUTINE			*/
+void	*philo_routine(void *arg);
 /*			UTILS			*/
 void	check_arg_int(int ac, char **av, t_data *data, int i, t_philo *philo);
 int		check_is_numbr(char *str);

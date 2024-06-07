@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_init00.c                                     :+:      :+:    :+:   */
+/*   routine00.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/06 14:42:33 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/06 14:48:37 by acabarba         ###   ########.fr       */
+/*   Created: 2024/06/07 14:30:36 by acabarba          #+#    #+#             */
+/*   Updated: 2024/06/07 14:50:32 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/include.h"
 
-void	philo_init(int ac, char **av, t_data *data)
+void	*philo_routine(void *arg)
 {
-	
+	(void)arg;
+	printf("je suis a la routine");
+	return NULL;
 }

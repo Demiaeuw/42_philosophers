@@ -1,0 +1,91 @@
+Feuille de route pour résoudre l'exercice des philosophes
+Étape 1: Comprendre les exigences du projet
+
+    Lire le sujet du projet :
+        Un groupe de philosophes s'assoit autour d'une table avec un bol de spaghetti au milieu.
+        Les philosophes alternent entre manger, penser et dormir.
+        Ils prennent des fourchettes pour manger et les reposent après avoir mangé.
+        La simulation s'arrête lorsqu'un philosophe meurt de faim.
+
+    Arguments du programme :
+        number_of_philosophers : Nombre de philosophes et de fourchettes.
+        time_to_die : Temps en millisecondes avant qu'un philosophe meure de faim s'il n'a pas mangé.
+        time_to_eat : Temps en millisecondes que prend un philosophe pour manger.
+        time_to_sleep : Temps en millisecondes que prend un philosophe pour dormir.
+        number_of_times_each_philosopher_must_eat (optionnel) : Nombre de fois que chaque philosophe doit manger avant que la simulation s'arrête.
+
+Étape 2: Préparer l'environnement de développement
+
+    Créer les répertoires et fichiers nécessaires :
+        Répertoire philo/
+        Fichiers Makefile, *.h, *.c dans philo/
+
+    Configurer le Makefile :
+        Contenir les règles $(NAME), all, clean, fclean, re.
+        Compiler les fichiers sources avec les options -Wall -Wextra -Werror.
+
+Étape 3: Implémenter les fonctionnalités de base
+
+    Initialiser les threads et les mutex :
+        Utiliser pthread_create pour créer un thread par philosophe.
+        Utiliser pthread_mutex_init pour initialiser un mutex par fourchette.
+
+    Gestion des fourchettes :
+        Chaque philosophe prend les fourchettes adjacentes (à gauche et à droite) en utilisant pthread_mutex_lock.
+        Relâche les fourchettes après avoir mangé en utilisant pthread_mutex_unlock.
+
+    Simulation des actions des philosophes :
+        Implémenter les fonctions pour manger, penser, dormir.
+        Utiliser usleep pour simuler les temps de chaque action.
+
+    Surveillance de la faim des philosophes :
+        Utiliser gettimeofday pour vérifier le temps écoulé depuis le dernier repas.
+        Arrêter la simulation si un philosophe meurt de faim.
+
+Étape 4: Assurer la synchronisation et éviter les conditions de course
+
+    Protéger les accès partagés :
+        Utiliser des mutex pour protéger les accès aux ressources partagées.
+        S'assurer que les messages de log ne se mélangent pas en utilisant des mutex.
+
+    Gérer la terminaison de la simulation :
+        Implémenter la logique pour arrêter proprement la simulation lorsque les conditions de fin sont remplies (mort d'un philosophe ou nombre minimal de repas atteint).
+
+Étape 5: Tester et déboguer
+
+    Créer des programmes de test :
+        Tester différents scénarios pour s'assurer que la simulation fonctionne correctement.
+        Utiliser des assertions et des logs pour vérifier le bon fonctionnement du programme.
+
+    Corriger les erreurs et optimiser :
+        Utiliser des outils comme valgrind pour vérifier les fuites de mémoire.
+        Optimiser les performances si nécessaire.
+
+Documentation des fonctions autorisées
+
+    memset : Remplir une zone mémoire avec une valeur constante.
+
+    printf : Afficher des messages formatés.
+
+    malloc : Allouer de la mémoire dynamique.
+
+    free : Libérer de la mémoire allouée dynamiquement.
+
+    write : Écrire des données dans un descripteur de fichier.
+
+    usleep : Suspendre l'exécution du thread pendant un certain nombre de microsecondes.
+
+    gettimeofday : Obtenir l'heure actuelle.
+
+    pthread_create : Créer un nouveau thread.
+
+    pthread_detach : Détacher un thread pour qu'il se termine automatiquement lorsqu'il a fini d'exécuter.
+    
+    pthread_join : Attendre la fin d'un thread.
+    pthread_mutex_init : Initialiser un mutex.
+
+    pthread_mutex_destroy : Détruire un mutex.
+
+    pthread_mutex_lock : Verrouiller un mutex.
+    
+    pthread_mutex_unlock : Déverrouiller un mutex.
