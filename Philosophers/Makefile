@@ -33,7 +33,7 @@ rapide: $(NAME)
 
 # Règle pour créer l'exécutable
 $(NAME): $(OBJS) $(OBJSUTILS) 
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(OBJSUTILS) 
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(OBJSUTILS) -lpthread
 
 # Règle pour nettoyer les fichiers objets
 exe: all clean

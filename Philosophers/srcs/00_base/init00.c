@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 15:08:21 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/07 14:40:54 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:09:14 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,15 @@ void	data_init(t_data **data)
 	(*data)->tt_e = 0;
 	(*data)->tt_s = 0;
 	(*data)->nbreat = 0;
+	(*data)->forks = NULL;
+	(*data)->threads = NULL;
 }
 
 void	philo_init(t_data **data, t_philo **philo)
 {
 	int	i;
 	
-	*philo = malloc(sizeof(t_philo));
+	*philo = malloc(sizeof(t_philo) * (*data)->forks_nb);
 	if (*philo == NULL)
 	{
 		printf("\n\nError to init struct t_philo\n\n");
