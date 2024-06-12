@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:15:33 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/12 12:28:09 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/12 14:47:13 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <signal.h>
 # include <limits.h>
 
-int	main(int ac, char **av);
+int		main(int ac, char **av);
 
 typedef struct s_data
 {
@@ -31,9 +31,9 @@ typedef struct s_data
 	int		tt_e;
 	int		tt_s;
 	int		nbreat;
-	pthread_mutex_t *forks_mutex;
-	pthread_mutex_t print_mutex;
-	pthread_t *threads;
+	pthread_t	*threads;
+	pthread_mutex_t	*forks_mutex;
+	pthread_mutex_t	print_mutex;
 }	t_data;
 
 typedef struct s_philo
@@ -42,7 +42,6 @@ typedef struct s_philo
 	t_data	*data;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
-	
 }	t_philo;
 /*			BASE			*/
 //			ERROR
@@ -64,11 +63,11 @@ void	mutex_init(t_data *data, t_philo *philo);
 
 /*			ARGUMENT		*/
 void	main_argument(int ac, char **av, t_data *data, t_philo *philo);
-void	forksnbr(int ac, char **av, t_data *data, t_philo *philo);
-void	t_t_d(int ac, char **av, t_data *data, t_philo *philo);
-void	t_t_e(int ac, char **av, t_data *data, t_philo *philo);
-void	t_t_s(int ac, char **av, t_data *data, t_philo *philo);
-void	nbr_eat(int ac, char **av, t_data *data, t_philo *philo);
+void	forksnbr(char **av, t_data *data, t_philo *philo);
+void	t_t_d(char **av, t_data *data, t_philo *philo);
+void	t_t_e(char **av, t_data *data, t_philo *philo);
+void	t_t_s(char **av, t_data *data, t_philo *philo);
+void	nbr_eat(char **av, t_data *data, t_philo *philo);
 
 /*			THREAD			*/
 void	init_thread(t_data **data, t_philo **philo);
@@ -76,7 +75,7 @@ void	init_thread(t_data **data, t_philo **philo);
 /*			ROUTINE			*/
 void	*philo_routine(void *arg);
 /*			UTILS			*/
-void	check_arg_int(int ac, char **av, t_data *data, int i, t_philo *philo);
+void	check_arg_int(char **av, t_data *data, int i, t_philo *philo);
 int		check_is_numbr(char *str);
 int		check_int(char *str);
 int		ft_atoi(const char *str);

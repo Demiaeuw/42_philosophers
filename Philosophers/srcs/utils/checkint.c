@@ -6,15 +6,14 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:51:03 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/06 15:57:53 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/12 14:43:56 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/include.h"
 
-void	check_arg_int(int ac, char **av, t_data *data, int i, t_philo *philo)
+void	check_arg_int(char **av, t_data *data, int i, t_philo *philo)
 {
-	(void)ac;
 	if (check_is_numbr(av[i]) == 0 || check_int(av[i]) == 0)
 	{
 		if (i == 1)
