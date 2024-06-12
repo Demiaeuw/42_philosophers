@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 15:37:50 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/10 18:10:35 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/12 12:24:41 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int ac, char **av)
 	main_argument(ac, av, data, philo);
 	philo_init(&data, &philo);
 	mutex_init(data, philo);
-	init_thread(ac, av, &data, &philo);
+	init_thread(&data, &philo);
 	
 	//
 	print_struct(&(*data));

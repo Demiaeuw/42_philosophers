@@ -82,6 +82,7 @@ Documentation des fonctions autorisées
     pthread_detach : Détacher un thread pour qu'il se termine automatiquement lorsqu'il a fini d'exécuter.
     
     pthread_join : Attendre la fin d'un thread.
+    
     pthread_mutex_init : Initialiser un mutex.
 
     pthread_mutex_destroy : Détruire un mutex.
@@ -89,3 +90,25 @@ Documentation des fonctions autorisées
     pthread_mutex_lock : Verrouiller un mutex.
     
     pthread_mutex_unlock : Déverrouiller un mutex.
+
+
+
+
+
+    Utilisation de Valgrind avec Helgrind
+
+Helgrind est un outil de Valgrind conçu pour détecter les problèmes de synchronisation dans les programmes multithreads. 
+Il peut aider à identifier les conditions de course, les deadlocks, et d'autres problèmes de synchronisation, 
+y compris potentiellement des problèmes liés à la gestion incorrecte des mutex.
+
+Voici comment vous pouvez utiliser Helgrind pour analyser votre programme :
+
+    bash
+
+```
+valgrind --tool=helgrind ./your_program arguments
+```
+
+Cette commande lance votre programme sous la surveillance de Helgrind, 
+qui rapportera les problèmes de synchronisation tels que l'utilisation de mutex non initialisés, 
+les deadlocks, et les destructions de mutex alors qu'ils sont encore utilisés.

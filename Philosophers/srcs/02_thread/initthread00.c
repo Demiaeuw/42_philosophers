@@ -6,18 +6,16 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 13:04:45 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/07 14:43:53 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/12 12:24:23 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/include.h"
 
-void	init_thread(int ac, char **av, t_data **data, t_philo **philo)
+void	init_thread(t_data **data, t_philo **philo)
 {
 	int	i;
 
-	(void)ac;
-	(void)av;
 	(*data)->threads = malloc(sizeof(pthread_t) * (*data)->forks_nb);
 	if ((*data)->threads == NULL)
 	{
@@ -43,5 +41,4 @@ void	init_thread(int ac, char **av, t_data **data, t_philo **philo)
 		pthread_join((*data)->threads[i], NULL);
 		i++;
 	}
-	
 }

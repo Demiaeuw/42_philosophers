@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:15:33 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/12 11:49:43 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/12 12:28:09 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ void	t_t_s(int ac, char **av, t_data *data, t_philo *philo);
 void	nbr_eat(int ac, char **av, t_data *data, t_philo *philo);
 
 /*			THREAD			*/
-void	init_thread(int ac, char **av, t_data **data, t_philo **philo);
+void	init_thread(t_data **data, t_philo **philo);
 
 /*			ROUTINE			*/
-void	*philo_routine(void *arg, t_data *data);
+void	*philo_routine(void *arg);
 /*			UTILS			*/
 void	check_arg_int(int ac, char **av, t_data *data, int i, t_philo *philo);
 int		check_is_numbr(char *str);

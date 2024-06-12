@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 15:08:21 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/12 11:50:33 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/12 12:22:09 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	mutex_init(t_data *data, t_philo *philo)
 	int		i;
 	
 	i = 0;
+	pthread_mutex_init(&data->print_mutex, NULL);
 	data->forks_mutex = malloc(sizeof(pthread_mutex_t) * data->forks_nb);
 	if (data->forks_mutex == NULL)
 	{
@@ -74,5 +75,4 @@ void	mutex_init(t_data *data, t_philo *philo)
 		}
 		i++;
 	}
-	pthread_mutex_init(&data->print_mutex, NULL);
 }
