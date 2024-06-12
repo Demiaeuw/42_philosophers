@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:15:33 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/10 18:15:34 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/12 11:49:43 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ typedef struct s_data
 	int		tt_e;
 	int		tt_s;
 	int		nbreat;
-	pthread_mutex_t *forks;
+	pthread_mutex_t *forks_mutex;
+	pthread_mutex_t print_mutex;
 	pthread_t *threads;
 }	t_data;
 
@@ -73,7 +74,7 @@ void	nbr_eat(int ac, char **av, t_data *data, t_philo *philo);
 void	init_thread(int ac, char **av, t_data **data, t_philo **philo);
 
 /*			ROUTINE			*/
-void	*philo_routine(void *arg);
+void	*philo_routine(void *arg, t_data *data);
 /*			UTILS			*/
 void	check_arg_int(int ac, char **av, t_data *data, int i, t_philo *philo);
 int		check_is_numbr(char *str);

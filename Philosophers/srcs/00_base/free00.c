@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 15:07:20 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/07 14:39:18 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/12 11:58:56 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ void	main_free(t_data *data, t_philo *philo)
 
 	if (data)
 	{
-		if (data->forks)
+		if (data->forks_mutex)
 		{
 			i = 0;
 			while (i < data->forks_nb)
 			{
-				pthread_mutex_destroy(&data->forks[i]);
+				pthread_mutex_destroy(&data->forks_mutex[i]);
 				i++;
 			}
-			free(data->forks);
+			free(data->forks_mutex);
 		}
 		if (data->threads)
 			free(data->threads);
