@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 15:36:38 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/12 14:46:47 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/12 14:49:38 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	main_argument(int ac, char **av, t_data *data, t_philo *philo)
 	t_t_s(av, data, philo);
 	if (ac == 6)
 		nbr_eat(av, data, philo);
-	
 }
 
 /**

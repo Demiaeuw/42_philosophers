@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 15:08:21 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/12 12:22:09 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/12 14:49:00 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	data_init(t_data **data)
 void	philo_init(t_data **data, t_philo **philo)
 {
 	int	i;
-	
+
 	*philo = malloc(sizeof(t_philo) * (*data)->forks_nb);
 	if (*philo == NULL)
 	{
@@ -55,7 +55,7 @@ void	philo_init(t_data **data, t_philo **philo)
 void	mutex_init(t_data *data, t_philo *philo)
 {
 	int		i;
-	
+
 	i = 0;
 	pthread_mutex_init(&data->print_mutex, NULL);
 	data->forks_mutex = malloc(sizeof(pthread_mutex_t) * data->forks_nb);
