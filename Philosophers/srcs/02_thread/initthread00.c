@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 13:04:45 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/12 14:50:56 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/12 15:11:59 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ void	init_thread(t_data **data, t_philo **philo)
 		}
 		i++;
 	}
+	init_thread_join(data);
+}
+
+void	init_thread_join(t_data **data)
+{
+	int	i;
+
 	i = 0;
 	while (i < (*data)->forks_nb)
 	{

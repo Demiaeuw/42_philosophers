@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:15:33 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/12 14:47:13 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/12 15:09:45 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	nbr_eat(char **av, t_data *data, t_philo *philo);
 
 /*			THREAD			*/
 void	init_thread(t_data **data, t_philo **philo);
+void	init_thread_join(t_data **data);
 
 /*			ROUTINE			*/
 void	*philo_routine(void *arg);
