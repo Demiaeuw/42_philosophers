@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 13:04:45 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/12 16:39:02 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/18 16:08:41 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	init_thread(t_data **data, t_philo **philo)
 	while (i < (*data)->forks_nb)
 	{
 		if (pthread_create(&(*data)->threads[i],
-			NULL, philo_routine, &(*philo)[i]) != 0)
+				NULL, philo_routine, &(*philo)[i]) != 0)
 		{
 			printf("Error creating thread\n");
 			main_free(*data, *philo);

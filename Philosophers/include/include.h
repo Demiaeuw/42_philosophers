@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:15:33 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/12 15:09:45 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:06:58 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_philo
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 }	t_philo;
+
 /*			BASE			*/
 //			ERROR
 void	main_error(void (*f)(), t_data *data, t_philo *philo);
