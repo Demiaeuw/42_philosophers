@@ -170,6 +170,71 @@ Rcoder usleep pour avoir 100% de precision
 
 <--------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-a faire
+18/06/2024
 
-- Gestion d'argument : 
+<-------------------------------->
+Résumé de ce que vous avez fait
+<-------------------------------->
+
+1. Définition des Structures
+
+    t_data: Structure contenant les données globales, incluant le nombre de fourchettes, les temps de simulation, les threads et les mutex.
+    t_philo: Structure contenant les données spécifiques à chaque philosophe, y compris les mutex pour les fourchettes gauche et droite.
+
+2. Fonctions d'Initialisation
+
+    data_init: Initialise la structure t_data.
+    philo_init: Initialise les philosophes, assigne les fourchettes à gauche et à droite.
+    mutex_init: Initialise les mutex pour les fourchettes et le mutex pour l'affichage.
+
+3. Gestion des Arguments
+
+    main_argument: Gère les arguments de la ligne de commande pour initialiser les données.
+    Vérifications des arguments (check_arg_int, check_is_numbr, check_int).
+
+4. Création et Gestion des Threads
+
+    init_thread: Crée les threads pour les philosophes et lance la routine philo_routine.
+    init_thread_join: Joint tous les threads une fois qu'ils ont terminé.
+
+5. Routines des Philosophes
+
+    philo_routine: Routine exécutée par chaque thread de philosophe.
+
+6. Gestion des Erreurs et Libération de la Mémoire
+
+    main_error: Gère les erreurs et libère les ressources.
+    main_free: Libère les ressources allouées, y compris les mutex et les threads.
+
+
+<-------------------------------->
+Ce qu'il vous reste à faire
+<-------------------------------->
+
+1. Implémenter la Logique de Simulation des Philosophes
+
+    La fonction philo_routine actuellement ne fait qu'afficher un message. Vous devez implémenter la logique de la simulation des philosophes (manger, penser, dormir) en utilisant les mutex pour synchroniser l'accès aux fourchettes.
+
+2. Vérification et Gestion de la Fin de la Simulation
+
+    Implémentez des mécanismes pour vérifier quand la simulation doit se terminer (par exemple, quand tous les philosophes ont mangé le nombre requis de fois ou quand un philosophe meurt).
+
+3. Amélioration de la Gestion des Erreurs
+
+    Assurez-vous que toutes les erreurs possibles sont correctement gérées et que les ressources sont libérées en cas d'erreur.
+
+4. Tests et Validation
+
+    Testez le programme pour vérifier qu'il fonctionne correctement avec différentes configurations d'arguments.
+    Utilisez des outils comme Valgrind pour vérifier qu'il n'y a pas de fuites de mémoire.
+
+<-------------------------------->
+Points Clés Restants
+<-------------------------------->
+
+    Ajouter des conditions pour terminer la simulation (par exemple, vérifier si un philosophe meurt ou si tous les philosophes ont fini de manger).
+    Assurer que tous les threads et les ressources sont correctement libérés lorsque la simulation se termine.
+    Testez et validez la logique pour différents scénarios et configurations d'arguments.
+
+
+<--------------------------------------------------------------------------------------------------------------------------------------------------------------->
