@@ -24,7 +24,7 @@ OBJSUTILS = $(UTILS:.c=.o)
 
 # Flags de compilation
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=thread
 RM = rm -f
 
 # Règle par défaut
