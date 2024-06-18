@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:15:33 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/18 15:06:58 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:41:45 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	init_thread_join(t_data **data);
 
 /*			ROUTINE			*/
 void	*philo_routine(void *arg);
+void	print_lock(t_data *data, t_philo *philo, char *action);
 /*			UTILS			*/
 void	check_arg_int(char **av, t_data *data, int i, t_philo *philo);
 int		check_is_numbr(char *str);
