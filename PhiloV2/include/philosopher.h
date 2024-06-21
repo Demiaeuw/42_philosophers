@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:10:29 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/21 08:57:10 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/21 09:13:34 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ void	argument_error(void);
 void	init_data(t_data *data, int ac, char **av);
 t_philo	*init_philo(t_data *data);
 int	init_struct(t_data *data, t_philo **philo, int ac, char **av);
+//02
+void	free_philo(t_philo *philo, int nb_philo);
+void	cleanup(t_data *data, t_philo *philo);
 //10
 int		ft_atoi(const char *str);
 long	ft_atol(const char *str);
