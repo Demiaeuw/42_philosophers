@@ -1,14 +1,26 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   01_init.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/21 08:18:39 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/23 18:14:25 by acabarba         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+j'ai de nouveau un probleme 
+
+void	main_error(void (*f)(), t_data *data, t_philo *philo)
+{
+	f();
+	cleanup(data, philo);
+	exit(EXIT_FAILURE);
+}
+
+void	error_argument(void)
+{
+	ft_printf("\n\nError !\n\nArgument issue\n\n");
+}
+
+void	error_thread(void)
+{
+	ft_printf("\n\nError !\n\nThread issue\n\n");
+}
+
+void	error_mutex(void)
+{
+	ft_printf("\n\nError !\n\nMutex issue\n\n");
+}
 
 #include "../include/philosopher.h"
 
@@ -66,3 +78,40 @@ int	init_struct(t_data **data, t_philo **philo, int ac, char **av)
 	}
 	return (0);
 }
+
+int		main(int ac, char **av)
+{
+	t_data *data;
+	t_philo *philo;
+	if (argument_checker(ac, av) == -1)
+	{
+		error_argument();
+		return (-1);
+	}
+	if (init_struct(&data, &philo, ac, av) == -1)
+	{
+		main_error(error_argument, data, philo);
+		return (-1);
+	}
+	if (create_thread(data, philo) == -1)
+	{
+		main_error(error_thread, data, philo);
+		return (-1);
+	}
+	
+	write(1, "HelloWorld\n", 11);
+	cleanup(data, philo);
+	return (0);
+}
+
+et voici ma sortie standar
+
+acabarba@AdrienSurface:~/Documents/42_philosophers/PhiloV2$ ./philosopher 5 800 200 200
+
+
+Error !
+
+Mutex issue
+
+
+on dirait que mon prgramme n'arrive pas a init le mutax printex

@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:18:41 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/21 09:05:04 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/23 18:15:34 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,21 @@
 void	main_error(void (*f)(), t_data *data, t_philo *philo)
 {
 	f();
-	main_free(data, philo);
-	exit();
+	cleanup(data, philo);
+	exit(EXIT_FAILURE);
 }
 
-void	argument_error(void)
+void	error_argument(void)
 {
-	write(1, "\n\nError !\n\nArgument issue\n", 31);
+	ft_printf("\n\nError !\n\nArgument issue\n\n");
+}
+
+void	error_thread(void)
+{
+	ft_printf("\n\nError !\n\nThread issue\n\n");
+}
+
+void	error_mutex(void)
+{
+	ft_printf("\n\nError !\n\nMutex issue\n\n");
 }

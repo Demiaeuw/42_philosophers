@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:16:47 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/21 09:06:25 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/23 18:16:49 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,22 @@ int		main(int ac, char **av)
 	t_data *data;
 	t_philo *philo;
 	if (argument_checker(ac, av) == -1)
-		argument_error();
-	init_struct(data, &philo, ac, av);
+	{
+		error_argument();
+		return (-1);
+	}
+	if (init_struct(&data, &philo, ac, av) == -1)
+	{
+		main_error(error_argument, data, philo);
+		return (-1);
+	}
+	if (create_thread(data, philo) == -1)
+	{
+		main_error(error_thread, data, philo);
+		return (-1);
+	}
+	
 	write(1, "HelloWorld\n", 11);
+	cleanup(data, philo);
+	return (0);
 }

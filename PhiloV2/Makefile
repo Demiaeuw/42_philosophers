@@ -3,6 +3,13 @@ NAME = philosopher
 
 # Fichiers source
 SRCS =	main.c\
+		srcs/00_error.c\
+		srcs/01_init.c\
+		srcs/02_free.c\
+		srcs/03_thread.c\
+		srcs/10_ft_atoi.c\
+		srcs/11_checkint.c\
+		srcs/12_ft_printf.c
 
 
 # Fichiers objets

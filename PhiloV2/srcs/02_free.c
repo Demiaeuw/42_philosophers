@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:18:37 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/21 09:13:01 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/23 18:07:38 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,13 @@ void	free_philo(t_philo *philo, int nb_philo)
 	}
 }
 
-// void	free_data(t_data *data)
-// {
-// 	if (data)
-// 	{
-// 		// Libérez ici toute ressource allouée dans la structure t_data si nécessaire
-// 		// Actuellement, il n'y a pas d'allocation dynamique dans t_data
-// 	}
-// }
-
 void	cleanup(t_data *data, t_philo *philo)
 {
 	if (philo)
 		free_philo(philo, data->nb_philo);
-	// if (data)
-	// 	free_data(data);
+	if (data)
+	{
+		pthread_mutex_destroy(&data->printex);
+		free(data);
+	}
 }
