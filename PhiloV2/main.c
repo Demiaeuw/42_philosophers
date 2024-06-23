@@ -6,16 +6,17 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:16:47 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/23 18:16:49 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/23 19:21:07 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/philosopher.h"
 
-int		main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_data *data;
-	t_philo *philo;
+	t_data	*data;
+	t_philo	*philo;
+
 	if (argument_checker(ac, av) == -1)
 	{
 		error_argument();
@@ -31,7 +32,6 @@ int		main(int ac, char **av)
 		main_error(error_thread, data, philo);
 		return (-1);
 	}
-	
 	write(1, "HelloWorld\n", 11);
 	cleanup(data, philo);
 	return (0);

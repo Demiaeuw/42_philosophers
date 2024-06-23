@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:18:39 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/23 18:14:25 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/23 19:22:38 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,18 @@ void	init_data(t_data *data, int ac, char **av)
 		data->nb_meal_needed = ft_atoi(av[6]);
 	else
 		data->nb_meal_needed = -1;
-	if (pthread_mutex_init(&data->printex, NULL) == 0)
+	if (pthread_mutex_init(&data->printex, NULL) != 0)
 	{
 		error_mutex();
 		free(data);
 		exit(EXIT_FAILURE);
 	}
-		
 }
 
 t_philo	*init_philo(t_data *data)
 {
 	int		i;
-	t_philo *philo;
+	t_philo	*philo;
 
 	i = 0;
 	philo = malloc(sizeof(t_philo) * data->nb_philo);
