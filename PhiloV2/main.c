@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:16:47 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/23 19:21:07 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:23:17 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int ac, char **av)
 		main_error(error_argument, data, philo);
 		return (-1);
 	}
+	print_struct(&(*data));
 	if (create_thread(data, philo) == -1)
 	{
 		main_error(error_thread, data, philo);

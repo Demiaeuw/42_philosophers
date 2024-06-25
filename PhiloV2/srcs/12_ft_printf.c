@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 17:01:20 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/23 19:31:14 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:28:29 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,17 @@ int	ft_printf(const char *str, ...)
 		i++;
 	}
 	return (va_end(arg), count);
+}
+
+void	print_struct(t_data *data)
+{
+	ft_printf("\n\n\n");
+	ft_printf("\033[32mVoici la structure DATA\n\n\033[0m");
+	ft_printf("\033[34mNb of Philosopher\033[0m : %d\n", data->nb_philo);
+	ft_printf("\033[34mTime to die\033[0m : %d\n", data->time_to_die);
+	ft_printf("\033[34mTime to eat\033[0m : %d\n", data->time_to_eat);
+	ft_printf("\033[34mTime to sleep\033[0m : %d\n", data->time_to_sleep);
+	ft_printf("\033[34m(optional) Nb"
+		" of meal\033[0m : %d\n", data->nb_meal_needed);
+	ft_printf("\n\n\n");
 }

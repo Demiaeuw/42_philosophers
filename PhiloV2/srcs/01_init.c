@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:18:39 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/23 19:22:38 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:31:17 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_data(t_data *data, int ac, char **av)
 	data->time_to_eat = ft_atoi(av[3]);
 	data->time_to_sleep = ft_atoi(av[4]);
 	if (ac == 6)
-		data->nb_meal_needed = ft_atoi(av[6]);
+		data->nb_meal_needed = ft_atoi(av[5]);
 	else
 		data->nb_meal_needed = -1;
 	if (pthread_mutex_init(&data->printex, NULL) != 0)

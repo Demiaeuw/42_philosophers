@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:10:29 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/23 19:33:23 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:22:17 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ int		argument_checker(int ac, char **av);
 void	ft_putstr_printf(char *str, int *count);
 void	ft_pr_pf(long long int nb, int base, int *count);
 int		ft_printf(const char *str, ...);
+void	print_struct(t_data *data);
 
 #endif
