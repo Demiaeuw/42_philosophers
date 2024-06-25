@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 17:22:02 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/23 19:23:37 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:00:13 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,17 @@ void	*routine(void *arg)
 
 	philo = (t_philo *) arg;
 	pthread_mutex_lock(&philo->data->printex);
-	ft_printf("Je suis le philo n° %d, et je commence la routine\n", philo->id);
+	ft_printf("Je suis le philo n° %d, et je commence la routine.\n", philo->id);
 	pthread_mutex_unlock(&philo->data->printex);
+	
+	pthread_mutex_lock(&philo->data->printex);
+	ft_printf("le Philosophe n° %d, Commence a manger.\n", philo->id);
+	pthread_mutex_unlock(&philo->data->printex);
+	usleep(1000 * philo->data->time_to_eat);
+	philo->nb_meal++;
+	pthread_mutex_lock(&philo->data->printex);
+	ft_printf("Le Philosophe n° %d a finit de manger.\n", philo->id);
+	pthread_mutex_unlock(&philo->data->printex);
+	
 	return (NULL);
 }
