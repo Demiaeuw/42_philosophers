@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:10:29 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/25 16:22:17 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:34:31 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,12 @@ typedef struct s_philo
 	int				id;
 	int				nb_meal;
 	pthread_t		thread;
-	pthread_mutex_t	*fork;
+
+	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*print;
 	t_data			*data;
+	struct timeval last_meal;
 }	t_philo;
 //00
 void	main_error(void (*f)(), t_data *data, t_philo *philo);

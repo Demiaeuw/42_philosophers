@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:18:39 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/25 16:31:17 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:38:38 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,27 @@ t_philo	*init_philo(t_data *data)
 {
 	int		i;
 	t_philo	*philo;
+	pthread_mutex_t	*forks;
 
 	i = 0;
 	philo = malloc(sizeof(t_philo) * data->nb_philo);
 	if (!philo)
 		return (NULL);
+	forks = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
+	if (!forks)
+	{
+		free(philo);
+		return (NULL);
+	}
 	while (i < data->nb_philo)
 	{
 		philo[i].id = i + 1;
 		philo[i].nb_meal = 0;
-		philo[i].fork = NULL;
+		philo[i].left_fork = &forks[i];
+		philo[i].right_fork = &forks[(i + 1) % data->nb_philo];
 		philo[i].print = NULL;
 		philo[i].data = data;
+		gettimeofday(&philo[i].last_meal, NULL);
 		i++;
 	}
 	return (philo);

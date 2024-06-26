@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:18:37 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/23 19:22:57 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:22:34 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ void	free_philo(t_philo *philo, int nb_philo)
 	{
 		while (i < nb_philo)
 		{
-			if (philo[i].fork)
-				pthread_mutex_destroy(philo[i].fork);
+			if (philo[i].right_fork)
+				pthread_mutex_destroy(philo[i].right_fork);
+			if (philo[i].left_fork)
+				pthread_mutex_destroy(philo[i].left_fork);
 			if (philo[i].print)
 				pthread_mutex_destroy(philo[i].print);
 			i++;
