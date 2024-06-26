@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:18:39 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/26 16:38:38 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/26 18:03:34 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	init_data(t_data *data, int ac, char **av)
 		free(data);
 		exit(EXIT_FAILURE);
 	}
+	data->someone_died = 0;
 }
 
 t_philo	*init_philo(t_data *data)

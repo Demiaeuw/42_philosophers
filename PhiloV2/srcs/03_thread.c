@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 17:22:02 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/26 17:35:46 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/26 18:03:59 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	*routine(void *arg)
 	while (1)
 	{
 		// Gestion de la Mort, si attente depuis le dernier repas > philo->data->time_to_death
+		if (philo->data->someone_died)
+			break ;
 		gettimeofday(&current_time, NULL);
 		time_diff = (current_time.tv_sec - philo->last_meal.tv_sec) * 1000 + 
 		            (current_time.tv_usec - philo->last_meal.tv_usec) / 1000;
@@ -51,6 +53,7 @@ void	*routine(void *arg)
 			pthread_mutex_lock(&philo->data->printex);
 			ft_printf("Philosophe n° %d is dead.\n", philo->id);
 			pthread_mutex_unlock(&philo->data->printex);
+			philo->data->someone_died = 1;
 			break;
 		}
 		//
