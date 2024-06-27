@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:18:39 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/27 15:15:24 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/27 15:43:07 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,53 @@ void	init_data(t_data *data, int ac, char **av)
 	data->someone_died = 0;
 }
 
+void	initphilo(t_philo *p, pthread_mutex_t *f, int i, t_data *data)
+{
+	p->id = i + 1;
+	p->nb_meal = 0;
+	p->left_fork = &f[i];
+	p->right_fork = &f[(i + 1) % data->nb_philo];
+	p->print = NULL;
+	p->data = data;
+	gettimeofday(&p->last_meal, NULL);
+}
+
+pthread_mutex_t	*init_forks(int nb_philo)
+{
+	pthread_mutex_t	*forks;
+	int				i;
+
+	forks = malloc(sizeof(pthread_mutex_t) * nb_philo);
+	if (!forks)
+		return (NULL);
+	i = 0;
+	while (i < nb_philo)
+	{
+		pthread_mutex_init(&forks[i], NULL);
+		i++;
+	}
+	return (forks);
+}
+
 t_philo	*init_philo(t_data *data)
 {
-	int		i;
-	t_philo	*philo;
+	int				i;
+	t_philo			*philo;
 	pthread_mutex_t	*forks;
 
-	i = 0;
 	philo = malloc(sizeof(t_philo) * data->nb_philo);
 	if (!philo)
 		return (NULL);
-	forks = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
+	forks = init_forks(data->nb_philo);
 	if (!forks)
 	{
 		free(philo);
 		return (NULL);
 	}
+	i = 0;
 	while (i < data->nb_philo)
 	{
-		philo[i].id = i + 1;
-		philo[i].nb_meal = 0;
-		philo[i].left_fork = &forks[i];
-		philo[i].right_fork = &forks[(i + 1) % data->nb_philo];
-		philo[i].print = NULL;
-		philo[i].data = data;
-		gettimeofday(&philo[i].last_meal, NULL);
+		initphilo(&philo[i], forks, i, data);
 		i++;
 	}
 	return (philo);

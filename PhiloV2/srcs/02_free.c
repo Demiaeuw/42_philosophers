@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:18:37 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/27 15:18:00 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/27 15:28:19 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	free_philo(t_philo *philo, int nb_philo)
 			i++;
 		}
 		if (nb_philo > 0 && philo[0].left_fork)
-            free(philo[0].left_fork);
+			free(philo[0].left_fork);
 		free(philo);
 	}
 }
