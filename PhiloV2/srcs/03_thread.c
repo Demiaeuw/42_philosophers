@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 17:22:02 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/26 18:03:59 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/27 15:06:33 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,19 @@ void	*routine(void *arg)
 			break;
 		}
 		//
-		
+
+		if (philo->data->someone_died)
+			break ;
+
 		// Penser
 		pthread_mutex_lock(&philo->data->printex);
 		ft_printf("\033[33mPhilosophe n°\33[0m %d \033[33mthinking.\033[0m\n", philo->id);
 		pthread_mutex_unlock(&philo->data->printex);
 		//
-		
+
+		if (philo->data->someone_died)
+			break ;		
+
 		// Prendre les fourchettes
 		pthread_mutex_lock(philo->right_fork);
 		pthread_mutex_lock(&philo->data->printex);
@@ -74,7 +80,12 @@ void	*routine(void *arg)
 		ft_printf("\033[31mPhilosophe n°\33[0m %d \033[31mtake LEFT_Fork.\033[0m\n", philo->id);
 		pthread_mutex_unlock(&philo->data->printex);
 		//
-		
+		if (philo->data->someone_died)
+		{
+			pthread_mutex_unlock(philo->right_fork);
+			pthread_mutex_unlock(philo->left_fork);
+			break ;
+		}
 		// Manger (sans gestion des forks avec gestion du nombre de repas)
 		if (philo->data->nb_meal_needed == -1 || philo->nb_meal < philo->data->nb_meal_needed)
 		{
@@ -88,7 +99,12 @@ void	*routine(void *arg)
 			ft_printf("\33[3;34mPhilosophe n°\33[0m %d \33[3;34mfinished eating.\n\33[0m", philo->id);
 			pthread_mutex_unlock(&philo->data->printex);
 		}
-		
+		if (philo->data->someone_died)
+		{
+			pthread_mutex_unlock(philo->right_fork);
+			pthread_mutex_unlock(philo->left_fork);
+			break ;
+		}	
 		// Lache la fourchette
 		pthread_mutex_unlock(philo->right_fork);
 		pthread_mutex_lock(&philo->data->printex);
@@ -107,14 +123,16 @@ void	*routine(void *arg)
 			break;
 		}
 		//
-
+		if (philo->data->someone_died)
+			break ;
 		// Dormir
 		pthread_mutex_lock(&philo->data->printex);
 		ft_printf("\033[32mPhilosophe n°\33[0m %d \033[32mgo to bed.\033[0m\n", philo->id);
 		usleep(1000 * philo->data->time_to_sleep);
 		pthread_mutex_unlock(&philo->data->printex);
 		//
-
+		if (philo->data->someone_died)
+			break ;
 		
 	}
 	return (NULL);
