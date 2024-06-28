@@ -131,3 +131,11 @@ Test with 2 philosophers and check the different times: a death delayed by more 
 Test with any values of your choice to verify all the requirements. Ensure philosophers die at the right time, that they don't steal forks, and so forth.
 
 <------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+V2 reste a faire
+
+- shutdown de la simulation quand mort.
+- affichage des temps dans les messages.
+- check des leak et des hellgrinds
+- refacto la routine au propre. (Enlever le fait de prendre et poser les fourchettes car pas demandé par le sujet)
