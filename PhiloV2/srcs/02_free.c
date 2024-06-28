@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:18:37 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/27 15:28:19 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/28 22:57:30 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	free_philo(t_philo *philo, int nb_philo)
 				pthread_mutex_destroy(philo[i].right_fork);
 			if (philo[i].left_fork)
 				pthread_mutex_destroy(philo[i].left_fork);
-			if (philo[i].print)
-				pthread_mutex_destroy(philo[i].print);
 			i++;
 		}
 		if (nb_philo > 0 && philo[0].left_fork)

@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 17:22:02 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/27 16:34:28 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/06/28 23:23:45 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	*routine(void *arg)
 	long	time_diff;
 
 	philo = (t_philo *) arg;
-	while (1)
+	while (philo->data->someone_died != 1)
 	{
 		// Vérification de la mort et de l'état général
 		gettimeofday(&current_time, NULL);
@@ -55,7 +55,7 @@ void	*routine(void *arg)
 				philo->data->someone_died = 1;
 			}
 			pthread_mutex_unlock(&philo->data->printex);
-			break;
+			break ;
 		}
 
 		// Penser
@@ -89,7 +89,7 @@ void	*routine(void *arg)
 				philo->data->someone_died = 1;
 			}
 			pthread_mutex_unlock(&philo->data->printex);
-			break;
+			break ;
 		}
 
 		// Manger
@@ -97,7 +97,7 @@ void	*routine(void *arg)
 		ft_printf("\33[1;34mPhilosophe n°\33[0m %d \33[1;34mstart eating.\n\33[0m", philo->id);
 		pthread_mutex_unlock(&philo->data->printex);
 
-		gettimeofday(&philo->last_meal, NULL); // Mettre à jour l'horodatage du dernier repas
+		// gettimeofday(&philo->last_meal, NULL); // Mettree à jour l'horodatage du drnier repas
 		usleep(1000 * philo->data->time_to_eat);
 		philo->nb_meal++;
 
@@ -122,7 +122,7 @@ void	*routine(void *arg)
 			pthread_mutex_lock(&philo->data->printex);
 			ft_printf("\33[2;34mPhilosophe n°\33[0m %d \33[2;34mhas eaten enough.\n\33[0m", philo->id);
 			pthread_mutex_unlock(&philo->data->printex);
-			break;
+			break ;
 		}
 
 		// Dormir
