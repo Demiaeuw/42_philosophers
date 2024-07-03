@@ -7,9 +7,11 @@ SRCS =	main.c\
 		srcs/01_init.c\
 		srcs/02_free.c\
 		srcs/03_thread.c\
+		srcs/04_time.c\
 		srcs/10_ft_atoi.c\
 		srcs/11_checkint.c\
-		srcs/12_ft_printf.c
+		srcs/12_ft_printf.c\
+		srcs/13_messageprint.c
 
 
 # Fichiers objets

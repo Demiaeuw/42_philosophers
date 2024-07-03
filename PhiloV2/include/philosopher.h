@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:10:29 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/28 22:57:18 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/03 18:15:29 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <limits.h>
 # include <stdarg.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 int				main(int ac, char **av);
 
@@ -30,7 +31,9 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				nb_meal_needed;
+	int				start_time;
 	int				someone_died;
+	pthread_mutex_t someone_died_mutex;
 	pthread_mutex_t	printex;
 }	t_data;
 
@@ -61,6 +64,10 @@ void			cleanup(t_data *data, t_philo *philo);
 //03
 int				create_thread(t_data *data, t_philo *philo);
 void			*routine(void *arg);
+//04
+long 			get_timestamp();
+int				get_duration(t_data *data);
+void			gestion_one_forks(t_philo *philo);
 //10
 int				ft_atoi(const char *str);
 long			ft_atol(const char *str);
@@ -73,5 +80,7 @@ void			ft_putstr_printf(char *str, int *count);
 void			ft_pr_pf(long long int nb, int base, int *count);
 int				ft_printf(const char *str, ...);
 void			print_struct(t_data *data);
+//13
+void	printmessage(t_philo *philo, char *str);
 
 #endif

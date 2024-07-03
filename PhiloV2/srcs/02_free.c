@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:18:37 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/28 22:57:30 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/03 17:19:35 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	cleanup(t_data *data, t_philo *philo)
 	if (data)
 	{
 		pthread_mutex_destroy(&data->printex);
+		pthread_mutex_destroy(&data->someone_died_mutex);
 		free(data);
 	}
 }

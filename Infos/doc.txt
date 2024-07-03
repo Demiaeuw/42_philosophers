@@ -138,6 +138,7 @@ V2 reste a faire
 -   faire un thread supervisor.
 -   shutdown de la simulation quand mort.
 
--   affichage des temps dans les messages.
+-   affichage des temps dans les messages. fait + faire une fonction d'ecriture
+
 -   check des leak et des hellgrinds.
 -   refacto la routine au propre. (Enlever le fait de prendre et poser les fourchettes car pas demandé par le sujet).

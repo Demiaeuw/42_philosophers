@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:18:39 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/28 22:57:16 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/03 17:18:59 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@ void	init_data(t_data *data, int ac, char **av)
 		data->nb_meal_needed = ft_atoi(av[5]);
 	else
 		data->nb_meal_needed = -1;
-	if (pthread_mutex_init(&data->printex, NULL) != 0)
+	if (pthread_mutex_init(&data->printex, NULL) != 0
+		|| pthread_mutex_init(&data->someone_died_mutex, NULL) != 0)
 	{
 		error_mutex();
 		free(data);
 		exit(EXIT_FAILURE);
 	}
 	data->someone_died = 0;
+	data->start_time = get_timestamp();
 }
 
 void	initphilo(t_philo *p, pthread_mutex_t *f, int i, t_data *data)
