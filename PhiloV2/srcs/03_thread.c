@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 17:22:02 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/04 07:10:41 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/04 07:22:56 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,18 @@ int	check_death(t_philo *philo)
 
 void	take_forks(t_philo *philo)
 {
-	pthread_mutex_lock(philo->right_fork);
-	pthread_mutex_lock(philo->left_fork);
-	pthread_mutex_lock(&philo->data->someone_died_mutex);
-	if (philo->data->someone_died == 0)
-	{
-		pthread_mutex_lock(&philo->data->printex);
-		ft_printf("%d \033[36mPhilosophe n°\33[0m"
-			" %d \033[36mhas taken forks.\33[0m\n",
-			get_duration(philo->data), philo->id);
-		pthread_mutex_unlock(&philo->data->printex);
-	}
-	pthread_mutex_unlock(&philo->data->someone_died_mutex);
+    pthread_mutex_lock(philo->right_fork);
+    pthread_mutex_lock(philo->left_fork);
+
+    pthread_mutex_lock(&philo->data->someone_died_mutex);
+    if (philo->data->someone_died == 0)
+    {
+        pthread_mutex_lock(&philo->data->printex);
+        ft_printf("%d \033[36mPhilosophe n°\33[0m %d \033[36mhas taken"
+			"forks.\33[0m\n", get_duration(philo->data), philo->id);
+        pthread_mutex_unlock(&philo->data->printex);
+    }
+    pthread_mutex_unlock(&philo->data->someone_died_mutex);
 }
 
 void	drop_forks(t_philo *philo)

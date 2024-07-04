@@ -140,10 +140,33 @@ V2 reste a faire
 
 -   affichage des temps dans les messages. fait + faire une fonction d'ecriture
 
+
+
+
+
+
+
+
 -   check des leak et des hellgrinds.
+        valgrind --tool=helgrind
+Ordre de Verrouillage Violé :
+
+    Il y a plusieurs instances où les threads acquièrent des verrous dans un ordre incorrect, causant des violations d'ordre de verrouillage. Par exemple, un thread acquiert le verrou à l'adresse 0x4A99250 avant 0x4A992F0, tandis qu'un autre thread fait l'inverse.
+
+Threads Quittant avec des Verrous Détenus :
+
+    Plusieurs threads quittent l'exécution alors qu'ils détiennent encore des verrous, ce qui peut causer des problèmes de synchronisation.
+
+
+
+
+
+
 -   refacto la routine au propre. (Enlever le fait de prendre et poser les fourchettes car pas demandé par le sujet).
 
 
 
 ATTENTION : impression que la couleur dans les messages rajoute du temps et donc die..... a check 
+
+
 
