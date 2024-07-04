@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 17:22:02 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/03 18:18:23 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/04 06:42:57 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,50 @@ int	create_thread(t_data *data, t_philo *philo)
 	return (0);
 }
 
+int	check_death(t_philo *philo)
+{
+	struct timeval current_time;
+	long time_diff;
+
+	gettimeofday(&current_time, NULL);
+	time_diff = (current_time.tv_sec - philo->last_meal.tv_sec) * 1000 + 
+				(current_time.tv_usec - philo->last_meal.tv_usec) / 1000;
+	if (time_diff > philo->data->time_to_die)
+	{
+		printmessage(philo, "dead");
+		pthread_mutex_lock(&philo->data->someone_died_mutex);
+		philo->data->someone_died = 1;
+		pthread_mutex_unlock(&philo->data->someone_died_mutex);
+		return 1;
+	}
+	return 0;
+}
+
+void	take_forks(t_philo *philo)
+{
+    pthread_mutex_lock(philo->right_fork);
+    pthread_mutex_lock(philo->left_fork);
+
+    pthread_mutex_lock(&philo->data->someone_died_mutex);
+    if (philo->data->someone_died == 0)
+    {
+        pthread_mutex_lock(&philo->data->printex);
+        ft_printf("%d \033[36mPhilosophe n°\33[0m %d \033[36mhas taken forks.\33[0m\n", get_duration(philo->data), philo->id);
+        pthread_mutex_unlock(&philo->data->printex);
+    }
+    pthread_mutex_unlock(&philo->data->someone_died_mutex);
+}
+
+void	drop_forks(t_philo *philo)
+{
+    pthread_mutex_unlock(philo->left_fork);
+    pthread_mutex_unlock(philo->right_fork);
+}
+
+
 void	*routine(void *arg)
 {
 	t_philo	*philo;
-	struct timeval current_time;
-	long	time_diff;
 
 	philo = (t_philo *) arg;
 
@@ -48,45 +87,19 @@ void	*routine(void *arg)
 	}
 	while (philo->data->someone_died != 1)
 	{
-		// Vérification de la mort et de l'état général
-		gettimeofday(&current_time, NULL);
-		time_diff = (current_time.tv_sec - philo->last_meal.tv_sec) * 1000 + 
-					(current_time.tv_usec - philo->last_meal.tv_usec) / 1000;
-		if (time_diff > philo->data->time_to_die || philo->data->someone_died)
-		{
-			if (time_diff > philo->data->time_to_die)
-			{
-				printmessage(philo, "dead");
-				pthread_mutex_lock(&philo->data->someone_died_mutex);
-				philo->data->someone_died = 1;
-				pthread_mutex_unlock(&philo->data->someone_died_mutex);
-			}
-			break ;
-		}
+		if (check_death(philo))
+			break;
 
 		// Penser
 		printmessage(philo, "thinking");
 
 		// Prendre les fourchettes
-		pthread_mutex_lock(philo->right_fork);
-		pthread_mutex_lock(philo->left_fork);
+		take_forks(philo);
 
-		// Vérification de la mort avant de manger
-		gettimeofday(&current_time, NULL);
-		time_diff = (current_time.tv_sec - philo->last_meal.tv_sec) * 1000 + 
-					(current_time.tv_usec - philo->last_meal.tv_usec) / 1000;
-		if (time_diff > philo->data->time_to_die || philo->data->someone_died)
+		if (check_death(philo))
 		{
-			pthread_mutex_unlock(philo->right_fork);
-			pthread_mutex_unlock(philo->left_fork);
-			if (time_diff > philo->data->time_to_die)
-			{
-				printmessage(philo, "dead");
-				pthread_mutex_lock(&philo->data->someone_died_mutex);
-				philo->data->someone_died = 1;
-				pthread_mutex_unlock(&philo->data->someone_died_mutex);
-			}
-			break ;
+			drop_forks(philo);
+			break;
 		}
 
 		// Manger
@@ -96,8 +109,7 @@ void	*routine(void *arg)
 		philo->nb_meal++;
 
 		// Lâcher les fourchettes
-		pthread_mutex_unlock(philo->left_fork);
-		pthread_mutex_unlock(philo->right_fork);
+		drop_forks(philo);
 
 		// Vérifier si le philosophe a mangé assez de fois
 		if (philo->data->nb_meal_needed > 0 && philo->nb_meal == philo->data->nb_meal_needed)

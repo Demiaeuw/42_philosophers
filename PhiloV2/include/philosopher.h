@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:10:29 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/03 18:15:29 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/04 06:42:21 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ void			free_philo(t_philo *philo, int nb_philo);
 void			cleanup(t_data *data, t_philo *philo);
 //03
 int				create_thread(t_data *data, t_philo *philo);
+int				check_death(t_philo *philo);
+void			take_forks(t_philo *philo);
+void			drop_forks(t_philo *philo);
 void			*routine(void *arg);
 //04
 long 			get_timestamp();
@@ -81,6 +84,7 @@ void			ft_pr_pf(long long int nb, int base, int *count);
 int				ft_printf(const char *str, ...);
 void			print_struct(t_data *data);
 //13
-void	printmessage(t_philo *philo, char *str);
+void			printmessage(t_philo *philo, char *str);
+int				ft_strcmp(char *s1, char *s2);
 
 #endif
