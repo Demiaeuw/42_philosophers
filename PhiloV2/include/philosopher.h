@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:10:29 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/04 06:42:21 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/04 07:16:22 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_data
 	int				nb_meal_needed;
 	int				start_time;
 	int				someone_died;
-	pthread_mutex_t someone_died_mutex;
+	pthread_mutex_t	someone_died_mutex;
 	pthread_mutex_t	printex;
 }	t_data;
 
@@ -68,9 +68,10 @@ void			take_forks(t_philo *philo);
 void			drop_forks(t_philo *philo);
 void			*routine(void *arg);
 //04
-long 			get_timestamp();
+long			get_timestamp(void);
 int				get_duration(t_data *data);
 void			gestion_one_forks(t_philo *philo);
+int				check_meals(t_philo *philo);
 //10
 int				ft_atoi(const char *str);
 long			ft_atol(const char *str);

@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 16:40:33 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/04 06:35:48 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/04 07:15:00 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	printmessage(t_philo *philo, char *message)
 			ft_printf("%d \033[32mPhilosophe n°\33[0m %d \033[32m"
 				"go to bed.\033[0m\n", get_duration(philo->data), philo->id);
 		else if (ft_strcmp(message, "full") == 0)
-			ft_printf("%d \033[2;34mPhilosophe n°\33[0m %d \33[2;34m"
-			"has eaten enough.\n\033[0m", get_duration(philo->data), philo->id);
+			ft_printf("%d \033[2;34mPhilosophe n°\33[0m %d \33[2;34mhas eaten"
+				" enough.\n\033[0m", get_duration(philo->data), philo->id);
 		else if (ft_strcmp(message, "dead") == 0)
 			ft_printf("%d Philosophe n° %d "
 				"is dead.\n", get_duration(philo->data), philo->id);
