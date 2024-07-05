@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 17:22:02 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/05 16:29:02 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/05 20:38:38 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	check_death(t_philo *philo)
 	return (0);
 }
 
-void take_forks(t_philo *philo)
+void	take_forks(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
 	{
@@ -64,7 +64,6 @@ void take_forks(t_philo *philo)
 		pthread_mutex_lock(philo->left_fork);
 		pthread_mutex_lock(philo->right_fork);
 	}
-
 	pthread_mutex_lock(&philo->data->someone_died_mutex);
 	if (philo->data->someone_died == 0)
 	{
@@ -76,52 +75,57 @@ void take_forks(t_philo *philo)
 	pthread_mutex_unlock(&philo->data->someone_died_mutex);
 }
 
-
 void	drop_forks(t_philo *philo)
 {
-	pthread_mutex_unlock(philo->left_fork);
-	pthread_mutex_unlock(philo->right_fork);
+	if (philo->id % 2 == 0)
+	{
+		pthread_mutex_unlock(philo->left_fork);
+		pthread_mutex_unlock(philo->right_fork);
+	}
+	else
+	{
+		pthread_mutex_unlock(philo->right_fork);
+		pthread_mutex_unlock(philo->left_fork);
+	}
 }
 
-void	*routine(void *arg)
-{
-	t_philo	*philo;
+// void	*routine(void *arg)
+// {
+// 	t_philo	*philo;
 
-	philo = (t_philo *) arg;
-	if (philo->data->nb_philo == 1)
-	{
-		gestion_one_forks(philo);
-		return (NULL);
-	}
-	while (1)
-	{
-		pthread_mutex_lock(&philo->data->someone_died_mutex);
-		if (philo->data->someone_died == 1)
-		{
-			pthread_mutex_unlock(&philo->data->someone_died_mutex);
-			break ;
-		}
-		pthread_mutex_unlock(&philo->data->someone_died_mutex);
-
-		if (check_death(philo))
-			break ;
-		printmessage(philo, "thinking");
-		take_forks(philo);
-		if (check_death(philo))
-		{
-			drop_forks(philo);
-			break ;
-		}
-		printmessage(philo, "eating");
-		gettimeofday(&philo->last_meal, NULL);
-		usleep(1000 * philo->data->time_to_eat);
-		philo->nb_meal++;
-		drop_forks(philo);
-		if (check_meals(philo))
-			break ;
-		printmessage(philo, "sleeping");
-		usleep(1000 * philo->data->time_to_sleep);
-	}
-	return (NULL);
-}
-
+// 	philo = (t_philo *) arg;
+// 	if (philo->data->nb_philo == 1)
+// 	{
+// 		gestion_one_forks(philo);
+// 		return (NULL);
+// 	}
+// 	while (1)
+// 	{
+// 		pthread_mutex_lock(&philo->data->someone_died_mutex);
+// 		if (philo->data->someone_died == 1)
+// 		{
+// 			pthread_mutex_unlock(&philo->data->someone_died_mutex);
+// 			break ;
+// 		}
+// 		pthread_mutex_unlock(&philo->data->someone_died_mutex);
+// 		if (check_death(philo))
+// 			break ;
+// 		printmessage(philo, "thinking");
+// 		take_forks(philo);
+// 		if (check_death(philo))
+// 		{
+// 			drop_forks(philo);
+// 			break ;
+// 		}
+// 		printmessage(philo, "eating");
+// 		gettimeofday(&philo->last_meal, NULL);
+// 		usleep(1000 * philo->data->time_to_eat);
+// 		philo->nb_meal++;
+// 		drop_forks(philo);
+// 		if (check_meals(philo))
+// 			break ;
+// 		printmessage(philo, "sleeping");
+// 		usleep(1000 * philo->data->time_to_sleep);
+// 	}
+// 	return (NULL);
+// }

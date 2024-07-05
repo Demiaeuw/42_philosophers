@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 16:40:33 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/05 16:27:44 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/05 20:23:36 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,23 @@ void	printmessage(t_philo *philo, char *message)
 	{
 		pthread_mutex_lock(&philo->data->printex);
 		if (ft_strcmp(message, "thinking") == 0)
-			ft_printf("%d Philosophe n° %d thinking.\n", get_duration(philo->data), philo->id);
+			ft_printf("%d Philosophe n° %d "
+				"thinking.\n", get_duration(philo->data), philo->id);
 		else if (ft_strcmp(message, "eating") == 0)
-			ft_printf("%d Philosophe n° %d start eating.\n", get_duration(philo->data), philo->id);
+			ft_printf("%d Philosophe n° %d "
+				"start eating.\n", get_duration(philo->data), philo->id);
 		else if (ft_strcmp(message, "sleeping") == 0)
-			ft_printf("%d Philosophe n° %d go to bed.\n", get_duration(philo->data), philo->id);
+			ft_printf("%d Philosophe n° %d "
+				"go to bed.\n", get_duration(philo->data), philo->id);
 		else if (ft_strcmp(message, "full") == 0)
-			ft_printf("%d Philosophe n° %d has eaten enough.\n", get_duration(philo->data), philo->id);
+			ft_printf("%d Philosophe n° %d "
+				"has eaten enough.\n", get_duration(philo->data), philo->id);
 		else if (ft_strcmp(message, "dead") == 0)
-			ft_printf("%d Philosophe n° %d is dead.\n", get_duration(philo->data), philo->id);
+			ft_printf("%d Philosophe n° %d "
+				"is dead.\n", get_duration(philo->data), philo->id);
 		else
-			ft_printf("%d, Philosophe %d, is %s.\n", get_duration(philo->data), philo->id, message);
+			ft_printf("%d, Philosophe %d, "
+				"is %s.\n", get_duration(philo->data), philo->id, message);
 		pthread_mutex_unlock(&philo->data->printex);
 	}
 	pthread_mutex_unlock(&philo->data->someone_died_mutex);

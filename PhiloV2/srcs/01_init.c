@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:18:39 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/05 16:09:33 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/05 20:19:35 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ void	initphilo(t_philo *p, pthread_mutex_t *f, int i, t_data *data)
 	gettimeofday(&p->last_meal, NULL);
 }
 
-pthread_mutex_t *init_forks(int nb_philo)
+pthread_mutex_t	*init_forks(int nb_philo)
 {
-	pthread_mutex_t *forks;
-	int i;
+	pthread_mutex_t	*forks;
+	int				i;
 
 	forks = malloc(sizeof(pthread_mutex_t) * nb_philo);
 	if (!forks)

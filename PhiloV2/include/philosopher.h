@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:10:29 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/04 07:16:22 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/05 20:32:47 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ pthread_mutex_t	*init_forks(int nb_philo);
 t_philo			*init_philo(t_data *data);
 int				init_struct(t_data **data, t_philo **philo, int ac, char **av);
 //02
+void			destroy_forks(t_philo *philo, int nb_philo, int *destro, int i);
 void			free_philo(t_philo *philo, int nb_philo);
 void			cleanup(t_data *data, t_philo *philo);
 //03
@@ -66,8 +67,11 @@ int				create_thread(t_data *data, t_philo *philo);
 int				check_death(t_philo *philo);
 void			take_forks(t_philo *philo);
 void			drop_forks(t_philo *philo);
-void			*routine(void *arg);
 //04
+void			check_and_print(t_philo *philo, char *message);
+void			eat_and_sleep(t_philo *philo);
+void			*routine(void *arg);
+//05
 long			get_timestamp(void);
 int				get_duration(t_data *data);
 void			gestion_one_forks(t_philo *philo);
