@@ -6,73 +6,147 @@
 #    By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/06 21:08:57 by acabarba          #+#    #+#              #
-#    Updated: 2024/07/06 21:20:43 by acabarba         ###   ########.fr        #
+#    Updated: 2024/07/07 22:14:37 by acabarba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 import subprocess
+import re
+import time
+from threading import Timer
 
-# Définir les couleurs ANSI pour l'affichage coloré
 class bcolors:
-    HEADER = '\033[95m'
     OKGREEN = '\033[92m'
     FAIL = '\033[91m'
+    WARNING = '\033[93m'
     ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
 
-# Fonction pour exécuter un test
-def run_test(command, expected_output=None, timeout=30):
+def run_command(command, timeout):
+    proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    timer = Timer(timeout, proc.kill)
     try:
-        # Exécuter la commande avec une limite de temps
-        result = subprocess.run(command, shell=True, check=True, capture_output=True, text=True, timeout=timeout)
-        output = result.stdout.strip()
-        # Vérifier si la sortie contient le texte attendu
-        if expected_output and expected_output not in output:
-            return False, output
-        return True, output
-    except subprocess.TimeoutExpired:
-        return False, "TimeOUT"
-    except subprocess.CalledProcessError as e:
-        return False, e.output
+        timer.start()
+        stdout, stderr = proc.communicate()
+        return stdout.decode('utf-8').strip(), stderr.decode('utf-8').strip(), proc.returncode
+    finally:
+        timer.cancel()
+
+def validate_output(output, expect_death, max_meals):
+    lines = output.split('\n')
+    keywords = ["died", "dead", "eating", "sleeping", "thinking", "takenforks", "taking forks", "bed"]
+    last_timestamp = -1
+    meal_counts = {}
+    death_occurred = False
+
+    for line in lines:
+        match = re.match(r'^(\d+)', line)
+        if match:
+            timestamp = int(match.group(1))
+            if timestamp < last_timestamp:
+                return False, f"KO -> No timer: {line}"
+            last_timestamp = timestamp
+        else:
+            return False, f"KO -> No timer: {line}"
+
+        if not any(keyword in line for keyword in keywords):
+            return False, f"KO -> No keyword message: {line}"
+
+        if "died" in line or "dead" in line:
+            death_occurred = True
+            continue
+
+        if death_occurred:
+            return False, f"KO -> Speak after death: {line}"
+
+        if max_meals:
+            for keyword in ["eating", "sleeping", "thinking", "takenforks", "taking forks", "bed"]:
+                if keyword in line:
+                    philo_id = re.search(r'n° (\d+)', line).group(1)
+                    meal_counts[philo_id] = meal_counts.get(philo_id, 0) + 1
+
+    if expect_death and not death_occurred:
+        return False, "KO -> Expected death did not occur"
+    
+    if max_meals and not all(count >= max_meals for count in meal_counts.values()):
+        return False, f"KO -> Not all philosophers ate {max_meals} times"
+
+    return True, "OK"
+
+def run_test(test_number, command, expect_death=False, max_meals=None, timeout=15):
+    print(f"test n°{test_number} : {command} : ", end='', flush=True)
+    stdout, stderr, returncode = run_command(command, timeout)
+    if returncode != 0:
+        print(f"{bcolors.FAIL}KO -> Command failed{bcolors.ENDC}")
+        return False
+
+    result, message = validate_output(stdout, expect_death, max_meals)
+    if result:
+        print(f"{bcolors.OKGREEN}{message}{bcolors.ENDC}")
+    else:
+        print(f"{bcolors.FAIL}{message}{bcolors.ENDC}")
+    return result
+
+def run_memory_leak_test(command):
+    stdout, stderr, returncode = run_command(f"valgrind --leak-check=full {command}", 60)
+    if "definitely lost: 0 bytes" in stderr and "indirectly lost: 0 bytes" in stderr:
+        return True
+    return False
+
+def run_data_race_test(command):
+    stdout, stderr, returncode = run_command(f"valgrind --tool=helgrind {command}", 60)
+    if "ThreadSanitizer: data race" not in stderr:
+        return True
+    return False
 
 def main():
-    # Définition des tests à exécuter
     tests = [
-        {"command": "./philosopher 5 800 200 200", "description": "test n°1 : 5 800 200 200", "expected": "Philosophe n°"},
-        {"command": "./philosopher 1 800 200 200", "description": "test n°2 : 1 800 200 200", "expected": "Philosophe n°"},
-        {"command": "./philosopher 5 800 200 200 7", "description": "test n°3 : 5 800 200 200 7", "expected": "Philosophe n°"},
-        {"command": "./philosopher 4 410 200 200", "description": "test n°4 : 4 410 200 200", "expected": "Philosophe n°"},
-        {"command": "./philosopher 4 310 200 100", "description": "test n°5 : 4 310 200 100", "expected": "Philosophe n°"},
-        {"command": "./philosopher 2 310 200 100", "description": "test n°6 : 2 310 200 100", "expected": "Philosophe n°"},
-        {"command": "valgrind --tool=helgrind ./philosopher 5 800 200 200", "description": "helgrind test : 5 800 200 200", "expected": "Philosophe n°"},
-        {"command": "valgrind --leak-check=full ./philosopher 5 800 200 200", "description": "memory leak test : 5 800 200 200", "expected": "Philosophe n°"}
+        ("1", "1 800 200 200", True, None),
+        ("2", "5 800 200 200", False, None),
+        ("3", "5 800 200 200 7", False, 7),
+        ("4", "4 410 200 200", False, None),
+        ("5", "4 310 200 100", True, None)
     ]
 
-    all_tests_passed = True
+    all_tests_ok = True
+    memory_leak_check = True
+    data_race_check = True
 
-    # Exécution des tests
-    for test in tests:
-        # Affichage de la description du test
-        print(f"{test['description']} : ", end="", flush=True)
-        passed, output = run_test(test["command"], test["expected"])
-        if passed:
-            # Affichage de "OK" en vert si le test est réussi
-            print(f"{bcolors.OKGREEN}OK{bcolors.ENDC}")
-        else:
-            # Affichage de "KO / TimeOUT" en rouge si le test dépasse le temps imparti
-            if output == "TimeOUT":
-                print(f"{bcolors.FAIL}KO / TimeOUT{bcolors.ENDC}")
-            else:
-                # Affichage de "KO" en rouge avec les détails de l'erreur
-                print(f"{bcolors.FAIL}KO\nDetails: {output}{bcolors.ENDC}")
-            all_tests_passed = False
+    for test_number, params, expect_death, max_meals in tests:
+        command = f"./philosopher {params}"
+        result = run_test(test_number, command, expect_death, max_meals)
+        if not result:
+            all_tests_ok = False
 
-    # Résumé final des tests
-    if all_tests_passed:
-        print(f"\n{bcolors.OKGREEN}All tests passed: Philo OK{bcolors.ENDC}\n")
+    if run_memory_leak_test("./philosopher 5 800 200 200"):
+        print(f"{bcolors.OKGREEN}Memory Leak Test 1 OK{bcolors.ENDC}")
     else:
-        print(f"\n{bcolors.FAIL}Some tests failed: Philo KO{bcolors.ENDC}\n")
+        print(f"{bcolors.FAIL}Memory Leak Test 1 KO -> Memory Leak{bcolors.ENDC}")
+        memory_leak_check = False
+
+    if run_memory_leak_test("./philosopher 4 310 200 100"):
+        print(f"{bcolors.OKGREEN}Memory Leak Test 2 OK{bcolors.ENDC}")
+    else:
+        print(f"{bcolors.FAIL}Memory Leak Test 2 KO -> Memory Leak{bcolors.ENDC}")
+        memory_leak_check = False
+
+    if run_data_race_test("./philosopher 5 800 200 200"):
+        print(f"{bcolors.OKGREEN}Data Race Test 1 OK{bcolors.ENDC}")
+    else:
+        print(f"{bcolors.FAIL}Data Race Test 1 KO -> Data Races{bcolors.ENDC}")
+        data_race_check = False
+
+    if run_data_race_test("./philosopher 4 310 200 100"):
+        print(f"{bcolors.OKGREEN}Data Race Test 2 OK{bcolors.ENDC}")
+    else:
+        print(f"{bcolors.FAIL}Data Race Test 2 KO -> Data Races{bcolors.ENDC}")
+        data_race_check = False
+
+    if all_tests_ok and memory_leak_check and data_race_check:
+        print(f"{bcolors.OKGREEN}Philosopher OK{bcolors.ENDC}")
+    elif all_tests_ok:
+        print(f"{bcolors.WARNING}Philosopher OK but check leaks and data races{bcolors.ENDC}")
+    else:
+        print(f"{bcolors.FAIL}Philosopher KO{bcolors.ENDC}")
 
 if __name__ == "__main__":
     main()
