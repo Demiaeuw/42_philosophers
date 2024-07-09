@@ -60,10 +60,3 @@ add_test(NAME DataRaceTest1
 add_test(NAME DataRaceTest2
          COMMAND valgrind --tool=helgrind ./philosopher 4 310 200 100
          WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
-
-# Ajouter une cible clean
-add_custom_target(clean-all
-COMMAND ${CMAKE_BUILD_TOOL} clean
-COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}
-COMMENT "Nettoyage des fichiers de build"
-)
