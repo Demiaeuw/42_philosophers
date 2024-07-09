@@ -20,7 +20,7 @@ OBJS = $(SRCS:.c=.o)
 
 # Flags de compilation
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -f
 
 # Règle par défaut
