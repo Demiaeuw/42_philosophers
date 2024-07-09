@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 17:22:02 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/09 21:35:55 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/09 23:47:21 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ void	take_forks(t_philo *philo)
 	if (philo->id % 2 == 0)
 		usleep(1000);
 	pthread_mutex_lock(philo->left_fork);
-	printmessage(philo, "taken forks");
+	printmessage(philo, "take left fork");
 	pthread_mutex_lock(philo->right_fork);
-	printmessage(philo, "taken forks");
+	printmessage(philo, "take right fork");
 	pthread_mutex_lock(&philo->data->someone_died_mutex);
 	if (philo->data->someone_died == 0)
 	{
 		pthread_mutex_lock(&philo->data->printex);
-		ft_printf("%d Philosophe n° %d has taken forks.\n",
+		ft_printf("%d Philosophe n° %d had two forks.\n",
 			get_duration(philo->data), philo->id);
 		pthread_mutex_unlock(&philo->data->printex);
 	}

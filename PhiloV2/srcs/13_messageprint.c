@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 16:40:33 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/09 21:35:34 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/09 23:49:38 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	printmessage(t_philo *philo, char *message)
 			printf("%d Philosophe n° %d is dead.\n",
 				get_duration(philo->data), philo->id);
 		else
-			printf("%d Philosophe n° %d is %s.\n",
+			printf("%d Philosophe n° %d %s.\n",
 				get_duration(philo->data), philo->id, message);
 		pthread_mutex_unlock(&philo->data->printex);
 	}
