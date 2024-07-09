@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 17:22:02 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/09 17:54:41 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/09 21:35:55 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	check_death(t_philo *philo)
 
 	gettimeofday(&current_time, NULL);
 	time_diff = (current_time.tv_sec - philo->last_meal.tv_sec) * 1000
-					+ (current_time.tv_usec - philo->last_meal.tv_usec) / 1000;
+		+ (current_time.tv_usec - philo->last_meal.tv_usec) / 1000;
 	if (time_diff > philo->data->time_to_die)
 	{
 		printmessage(philo, "dead");
@@ -54,26 +54,22 @@ int	check_death(t_philo *philo)
 
 void	take_forks(t_philo *philo)
 {
-	// Ensure all philosophers do not try to take forks at the same time
 	if (philo->id % 2 == 0)
-		usleep(1000); // Small delay for even philosophers
-
+		usleep(1000);
 	pthread_mutex_lock(philo->left_fork);
 	printmessage(philo, "taken forks");
-
 	pthread_mutex_lock(philo->right_fork);
 	printmessage(philo, "taken forks");
-	
 	pthread_mutex_lock(&philo->data->someone_died_mutex);
 	if (philo->data->someone_died == 0)
 	{
 		pthread_mutex_lock(&philo->data->printex);
-		ft_printf("%d Philosophe n° %d has taken forks.\n", get_duration(philo->data), philo->id);
+		ft_printf("%d Philosophe n° %d has taken forks.\n",
+			get_duration(philo->data), philo->id);
 		pthread_mutex_unlock(&philo->data->printex);
 	}
 	pthread_mutex_unlock(&philo->data->someone_died_mutex);
 }
-
 
 void	drop_forks(t_philo *philo)
 {

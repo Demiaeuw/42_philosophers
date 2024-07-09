@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:10:29 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/05 20:32:47 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/09 21:35:06 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,6 @@ int				ft_printf(const char *str, ...);
 void			print_struct(t_data *data);
 //13
 void			printmessage(t_philo *philo, char *str);
-int				ft_strcmp(char *s1, char *s2);
+int				strc(char *s1, char *s2);
 
 #endif

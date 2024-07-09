@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 16:40:33 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/09 17:55:32 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/07/09 21:35:34 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,29 @@ void	printmessage(t_philo *philo, char *message)
 	{
 		pthread_mutex_lock(&philo->data->printex);
 		if (strcmp(message, "thinking") == 0)
-			printf("%d Philosophe n° %d thinking.\n", get_duration(philo->data), philo->id);
+			printf("%d Philosophe n° %d thinking.\n",
+				get_duration(philo->data), philo->id);
 		else if (strcmp(message, "eating") == 0)
-			printf("%d Philosophe n° %d start eating.\n", get_duration(philo->data), philo->id);
-		else if (strcmp(message, "sleeping") == 0 || strcmp(message, "bed") == 0)
-			printf("%d Philosophe n° %d go to bed.\n", get_duration(philo->data), philo->id);
+			printf("%d Philosophe n° %d start eating.\n",
+				get_duration(philo->data), philo->id);
+		else if (strcmp(message, "sleeping") == 0 || strc(message, "bed") == 0)
+			printf("%d Philosophe n° %d go to bed.\n",
+				get_duration(philo->data), philo->id);
 		else if (strcmp(message, "full") == 0)
-			printf("%d Philosophe n° %d has eaten enough.\n", get_duration(philo->data), philo->id);
-		else if (strcmp(message, "dead") == 0 || strcmp(message, "died") == 0)
-			printf("%d Philosophe n° %d is dead.\n", get_duration(philo->data), philo->id);
+			printf("%d Philosophe n° %d has eaten enough.\n",
+				get_duration(philo->data), philo->id);
+		else if (strcmp(message, "dead") == 0 || strc(message, "died") == 0)
+			printf("%d Philosophe n° %d is dead.\n",
+				get_duration(philo->data), philo->id);
 		else
-			printf("%d Philosophe n° %d is %s.\n", get_duration(philo->data), philo->id, message);
+			printf("%d Philosophe n° %d is %s.\n",
+				get_duration(philo->data), philo->id, message);
 		pthread_mutex_unlock(&philo->data->printex);
 	}
 	pthread_mutex_unlock(&philo->data->someone_died_mutex);
 }
 
-
-int	ft_strcmp(char *s1, char *s2)
+int	strc(char *s1, char *s2)
 {
 	int	i;
 
