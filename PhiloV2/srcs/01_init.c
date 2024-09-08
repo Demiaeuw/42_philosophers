@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:18:39 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/05 20:19:35 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/08 16:51:36 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ void	initphilo(t_philo *p, pthread_mutex_t *f, int i, t_data *data)
 	p->right_fork = &f[(i + 1) % data->nb_philo];
 	p->data = data;
 	gettimeofday(&p->last_meal, NULL);
+	if (p->data->nb_meal_needed >= 0)
+		p->check_full = 0;
+	else
+		p->check_full = -1;
 }
 
 pthread_mutex_t	*init_forks(int nb_philo)

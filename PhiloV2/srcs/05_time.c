@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   04_time.c                                          :+:      :+:    :+:   */
+/*   05_time.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:50:52 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/04 07:15:35 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/08 16:57:52 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	check_meals(t_philo *philo)
 		&& philo->nb_meal == philo->data->nb_meal_needed)
 	{
 		printmessage(philo, "full");
+		philo->check_full = 1;
 		return (1);
 	}
 	return (0);

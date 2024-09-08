@@ -1,9 +1,12 @@
 {
   "files.associations": {
+    "*.c": "c",
     "pthread.h": "c",
     "include.h": "c",
     "string.h": "c",
-    "philosopher.h": "c"
+    "philosopher.h": "c",
+    "philo.h": "c",
+    "tout": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",

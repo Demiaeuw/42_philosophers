@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 08:10:29 by acabarba          #+#    #+#             */
-/*   Updated: 2024/07/09 21:35:06 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/08 16:49:29 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_philo
 {
 	int				id;
 	int				nb_meal;
+	int				check_full;
 	pthread_t		thread;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*left_fork;

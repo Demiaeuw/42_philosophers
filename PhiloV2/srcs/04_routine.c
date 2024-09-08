@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 20:29:12 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/05 17:23:46 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/08 17:03:52 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ void	eat_and_sleep(t_philo *philo)
 	philo->nb_meal++;
 	drop_forks(philo);
 	if (check_meals(philo))
-	{
-		printf("\n   a finis de mager \n\n");
 		return ;
-	}
 	printmessage(philo, "sleeping");
 	usleep(1000 * philo->data->time_to_sleep);
 }
@@ -56,6 +53,10 @@ void	*routine(void *arg)
 		if (philo->data->someone_died == 1)
 		{
 			pthread_mutex_unlock(&philo->data->someone_died_mutex);
+			break ;
+		}
+		if (philo->check_full == 1)
+		{
 			break ;
 		}
 		pthread_mutex_unlock(&philo->data->someone_died_mutex);
