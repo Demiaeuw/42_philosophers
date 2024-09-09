@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 15:08:51 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/09 15:57:06 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/09 19:23:04 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_philo
 	long				time_lastmeal;
 	pthread_mutex_t		*fork_left;
 	pthread_mutex_t		*fork_right;
+	pthread_t			thread_philo;	
 	struct s_monitoring	*monitoring;
 		
 }				t_philo;
@@ -39,7 +40,7 @@ typedef struct s_monitoring
 	int					nb_philo;
 	int					tt_death;
 	int					tt_eat;
-	int					tt_think;
+	int					tt_sleep;
 	int					nb_meal;
 	int					check_alleat;
 	int					check_death;
@@ -49,15 +50,30 @@ typedef struct s_monitoring
 	pthread_mutex_t		mutex_print;
 	pthread_mutex_t		mutex_death;
 	pthread_t			thread_monitor;
-	t_philo				philo;
+	t_philo				*philo;
 }				t_monitoring;
 
 //00
 int			ft_atoi(const char *str);
-long		get_current_time(long start_time);
-int			get_duration(t_monitoring *monitor);
 long		get_timestamp(void);
 int			check_argument(int ac);
-
+//01
+int			init_monitoring(t_monitoring *monitor, int ac, char **av);
+int			init_mutexmonitoring(t_monitoring *monitor);
+int			init_philosophers(t_monitoring *monitor);
+int 		start_simulation(t_monitoring *monitor);
+//02
+void		clean_monitoring(t_monitoring *monitor);
+//03
+void 		print_status(t_philo *philo, char *status);
+//10
+void		*philo_routine(void *arg);
+void		take_forks(t_philo *philo);
+void 		drop_forks(t_philo *philo);
+void 		eat_philo(t_philo *philo);
+//11
+void 		sleep_philo(t_philo *philo);
+void 		think_philo(t_philo *philo);
+void		*monitor_routine(void *arg);
 
 #endif
