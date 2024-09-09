@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 01:15:54 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/09 04:49:08 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/09 15:07:26 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	*monitoring_routine(void *arg)
 	{
 		i = 0;
 		full_philosophers = 0;  // Réinitialiser le compteur à chaque itération
-		while (i < monitor->num_philosophers)
+		while (monitor->simulation_stop == 0)
 		{
 			pthread_mutex_lock(&monitor->death_mutex);
 
@@ -38,7 +38,7 @@ void	*monitoring_routine(void *arg)
 			}
 
 			// Si le nombre de repas est requis, vérifier si ce philosophe a mangé suffisamment
-			if (monitor->num_meals_required != -1 &&
+			if (monitor->num_meals_required >= 0 &&
 				monitor->philosophers[i].meals_eaten >= monitor->num_meals_required)
 			{
 				full_philosophers++; // Ce philosophe a atteint le nombre de repas requis

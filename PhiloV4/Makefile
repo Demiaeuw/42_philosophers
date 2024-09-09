@@ -3,7 +3,7 @@ NAME = philo
 
 # Compilateur et options de compilation
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -pthread
 
 # Dossiers
 INCLUDES_DIR = includes

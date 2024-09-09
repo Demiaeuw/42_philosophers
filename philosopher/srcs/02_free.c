@@ -1,28 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error01.c                                          :+:      :+:    :+:   */
+/*   02_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/05 16:45:19 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/12 14:48:34 by acabarba         ###   ########.fr       */
+/*   Created: 2024/09/09 15:29:02 by acabarba          #+#    #+#             */
+/*   Updated: 2024/09/09 15:29:31 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/include.h"
-
-void	error_tts(void)
-{
-	printf("\n\n\033[31mERROR\033[0m\n\n");
-	printf("Argument Problem\n\n"
-		"\033[34m<time to sleep>\033[0m must be an int > 0.\n\n");
-}
-
-void	error_nbreat(void)
-{
-	printf("\n\n\033[31mERROR\033[0m\n\n");
-	printf("Argument Problem\n\n"
-		"\033[34m<number of times each philosopher must eat"
-		">\033[0m must be an int > 0.\n\n");
-}
+#include "../include/philo.h"

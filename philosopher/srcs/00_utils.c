@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   00_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/04 17:47:02 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/04 18:10:14 by acabarba         ###   ########.fr       */
+/*   Created: 2024/09/09 15:26:07 by acabarba          #+#    #+#             */
+/*   Updated: 2024/09/09 15:40:49 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/include.h"
+#include "../include/philo.h"
 
 int	ft_atoi(const char *str)
 {
@@ -38,25 +38,37 @@ int	ft_atoi(const char *str)
 	return (result);
 }
 
-long	ft_atol(const char *str)
+long	get_current_time(long start_time)
 {
-	long int	nb;
-	int			sign;
+	struct timeval	tv;
+	long			ms;
 
-	nb = 0;
-	sign = 1;
-	while ((*str == 32) || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '+' || *str == '-')
+	gettimeofday(&tv, NULL);
+	ms = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+	return (ms - start_time);
+}
+
+int	get_duration(t_monitoring *monitor)
+{
+	return (get_timestamp() - monitor->time_start);
+}
+
+long	get_timestamp(void)
+{
+	struct timeval	current_time;
+
+	gettimeofday(&current_time, NULL);
+	return (current_time.tv_sec * 1000 + current_time.tv_usec / 1000);
+}
+
+int	check_argument(int ac)
+{
+	if (ac < 5 || ac > 6)
 	{
-		if (*str == '-')
-			sign = (-1);
-		str++;
+		printf("\n\033[1;31mError\033[0m Invalid number of arguments.\n"
+				"Usage: ./philo num_philosophers time_to_die"
+				" time_to_eat time_to_sleep [num_meals_required]\n");
+		return (0);
 	}
-	while (*str >= '0' && *str <= '9')
-	{
-		nb = nb * 10 + *str - '0';
-		str++;
-	}
-	return (sign * nb);
+	return (1);
 }

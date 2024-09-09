@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 20:29:12 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/08 17:03:52 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:56:35 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	eat_and_sleep(t_philo *philo)
 	printmessage(philo, "eating");
 	gettimeofday(&philo->last_meal, NULL);
 	usleep(1000 * philo->data->time_to_eat);
-	philo->nb_meal++;
+	philo->nb_meal++;	
 	drop_forks(philo);
 	if (check_meals(philo))
 		return ;

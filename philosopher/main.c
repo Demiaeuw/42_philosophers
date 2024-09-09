@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/06 15:36:53 by acabarba          #+#    #+#             */
-/*   Updated: 2024/06/06 15:37:04 by acabarba         ###   ########.fr       */
+/*   Created: 2024/09/09 15:08:44 by acabarba          #+#    #+#             */
+/*   Updated: 2024/09/09 15:41:01 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/include.h"
+#include "include/philo.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+int	main(int ac, char **av)
 {
-	unsigned char	*j;
-
-	j = (unsigned char *)s;
-	while (n > 0)
-	{
-		*(j) = (unsigned char)c;
-		j++;
-		n--;
-	}
-	return (s);
+	if (!check_argument(ac))
+		return (1);
+	
 }
