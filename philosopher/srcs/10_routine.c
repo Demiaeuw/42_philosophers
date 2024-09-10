@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 17:56:02 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/09 19:25:46 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/10 19:30:33 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	*philo_routine(void *arg)
 	t_philo	*philo = (t_philo *)arg;
 
 	philo = (t_philo *)arg;
-	if (philo->id % 2 != 0)
-		usleep(100);
+	if (philo->id % 2 == 0)
+		usleep(10);
 	while (1)
 	{
 		pthread_mutex_lock(&philo->monitoring->mutex_death);

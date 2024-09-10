@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 15:08:51 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/09 19:23:04 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/10 19:35:25 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int			init_monitoring(t_monitoring *monitor, int ac, char **av);
 int			init_mutexmonitoring(t_monitoring *monitor);
 int			init_philosophers(t_monitoring *monitor);
 int 		start_simulation(t_monitoring *monitor);
+int			init_philosopher_forks(t_monitoring *monitor, int i);
+
 //02
 void		clean_monitoring(t_monitoring *monitor);
 //03

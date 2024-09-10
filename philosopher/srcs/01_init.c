@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 15:27:17 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/09 18:40:50 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/10 19:34:41 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,26 @@ int	init_mutexmonitoring(t_monitoring *monitor)
 	return (0);
 }
 
+int	init_philosopher_forks(t_monitoring *monitor, int i)
+{
+	if (monitor->philo[i].id % 2 == 0)
+	{
+		monitor->philo[i].fork_left = &monitor->mutex_thread[i];
+		monitor->philo[i].fork_right = &monitor->mutex_thread[(i + 1) % monitor->nb_philo];
+	}
+	else
+	{
+		monitor->philo[i].fork_left = &monitor->mutex_thread[(i + 1) % monitor->nb_philo];
+		monitor->philo[i].fork_right = &monitor->mutex_thread[i];
+	}
+	monitor->philo[i].time_lastmeal = monitor->time_start;
+	monitor->philo[i].meal_eaten = 0;
+	monitor->philo[i].monitoring = monitor;
+	if (pthread_create(&monitor->philo[i].thread_philo, NULL, &philo_routine, &monitor->philo[i]) != 0)
+		return (1);
+	return (0);
+}
+
 int	init_philosophers(t_monitoring *monitor)
 {
 	int	i;
@@ -73,21 +93,18 @@ int	init_philosophers(t_monitoring *monitor)
 	monitor->philo = malloc(sizeof(t_philo) * monitor->nb_philo);
 	if (!monitor->philo)
 		return (1);
+
 	i = 0;
 	while (i < monitor->nb_philo)
 	{
 		monitor->philo[i].id = i + 1;
-		monitor->philo[i].meal_eaten = 0;
-		monitor->philo[i].time_lastmeal = monitor->time_start;
-		monitor->philo[i].fork_left = &monitor->mutex_thread[i];
-		monitor->philo[i].fork_right = &monitor->mutex_thread[(i + 1) % monitor->nb_philo];
-		monitor->philo[i].monitoring = monitor;
-		if (pthread_create(&monitor->philo[i].thread_philo, NULL, &philo_routine, &monitor->philo[i]) != 0)
+		if (init_philosopher_forks(monitor, i) != 0)
 			return (1);
 		i++;
 	}
 	return (0);
 }
+
 
 int start_simulation(t_monitoring *monitor)
 {
