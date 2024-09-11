@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 18:18:47 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/09 19:24:03 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/11 01:34:23 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	*monitor_routine(void *arg)
 			pthread_mutex_unlock(&monitor->mutex_death);
 			i++;
 		}
-		usleep(1000);
+		usleep(10);
 	}
 	return (NULL);
 }

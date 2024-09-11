@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 20:47:59 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/10 23:19:09 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/11 02:20:41 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,32 @@ void	init(t_data *data)
 
 	i = 0;
 	ph = data->philos;
-	data->start = stock_time();
-	while (i < data->n_philo)
+	data->time_simstart = get_time();
+	while (i < data->philo_nb)
 	{
 		pthread_create(&(ph[i].n_thread), NULL, routine, &(ph[i]));
-		pthread_mutex_lock(&(data->eat_m));
-		ph[i].last_eat_ph = stock_time();
-		pthread_mutex_unlock(&(data->eat_m));
+		pthread_mutex_lock(&(data->mutex_eat));
+		ph[i].time_philolastmeal = get_time();
+		pthread_mutex_unlock(&(data->mutex_eat));
 		i++;
 	}
 	is_dead(data, ph);
-	finish(data);
+	end_sim(data);
 }
 
-void	set_data(int argc, char **argv, t_data *data)
+void	init_data(int argc, char **argv, t_data *data)
 {
-	data->n_philo = ft_atoi(argv[1]);
-	data->t_die = ft_atoi(argv[2]);
-	data->t_eat = ft_atoi(argv[3]);
-	data->t_sleep = ft_atoi(argv[4]);
-	data->have_ate = 0;
+	data->philo_nb = ft_atoi(argv[1]);
+	data->tt_death = ft_atoi(argv[2]);
+	data->tt_eat = ft_atoi(argv[3]);
+	data->tt_sleep = ft_atoi(argv[4]);
+	data->check_eat = 0;
 	if (argc == 6)
-		data->meal_n = ft_atoi(argv[5]);
+		data->tt_meal = ft_atoi(argv[5]);
 	else
-		data->meal_n = -1;
-	data->forks = malloc(sizeof(pthread_mutex_t) * data->n_philo);
-	data->philos = malloc(sizeof(t_philo) * data->n_philo);
+		data->tt_meal = -1;
+	data->forks = malloc(sizeof(pthread_mutex_t) * data->philo_nb);
+	data->philos = malloc(sizeof(t_philo) * data->philo_nb);
 	init_mutex(data);
 	init(data);
 }
@@ -53,42 +53,41 @@ void	init_mutex(t_data *data)
 {
 	int	i;
 
-	i = data->n_philo;
+	i = data->philo_nb;
 	data->is_dead = 0;
-	pthread_mutex_init(&(data->write_m), NULL);
-	pthread_mutex_init(&(data->eat_m), NULL);
+	pthread_mutex_init(&(data->mutex_print), NULL);
+	pthread_mutex_init(&(data->mutex_eat), NULL);
 	while (--i >= 0)
 	{
 		pthread_mutex_init(&(data->forks[i]), NULL);
-		data->philos[i].id_ph = i + 1;
-		data->philos[i].n_eat_ph = 0;
-		data->philos[i].fork.l = i;
-		data->philos[i].fork.r = (i + 1) % data->n_philo;
-		data->philos[i].last_eat_ph = 0;
-		data->philos[i].data_ph = data;
+		data->philos[i].philo_id = i + 1;
+		data->philos[i].philo_nbeat = 0;
+		data->philos[i].fork.left = i;
+		data->philos[i].fork.right = (i + 1) % data->philo_nb;
+		data->philos[i].time_philolastmeal = 0;
+		data->philos[i].philo_data = data;
 	}
 }
 
-
-void	finish(t_data *data)
+void	end_sim(t_data *data)
 {
 	t_philo	*ph;
 	int		i;
 
 	i = 0;
 	ph = data->philos;
-	if (data->n_philo == 1)
-		pthread_mutex_unlock(&(data->forks[ph[0].fork.l]));
-	while (i < data->n_philo)
+	if (data->philo_nb == 1)
+		pthread_mutex_unlock(&(data->forks[ph[0].fork.left]));
+	while (i < data->philo_nb)
 	{
 		pthread_join(ph[i].n_thread, NULL);
 		i++;
 	}
 	i = 0;
-	while (++i < data->n_philo)
+	while (++i < data->philo_nb)
 		pthread_mutex_destroy(&(data->forks[i]));
-	pthread_mutex_destroy(&(data->write_m));
-	pthread_mutex_destroy(&(data->eat_m));
+	pthread_mutex_destroy(&(data->mutex_print));
+	pthread_mutex_destroy(&(data->mutex_eat));
 	free(data->forks);
 	free(data->philos);
 	exit (0);
