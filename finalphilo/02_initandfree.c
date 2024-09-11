@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 20:47:59 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/11 02:20:41 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/11 17:45:13 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,16 @@ void	init_mutex(t_data *data)
 		pthread_mutex_init(&(data->forks[i]), NULL);
 		data->philos[i].philo_id = i + 1;
 		data->philos[i].philo_nbeat = 0;
-		data->philos[i].fork.left = i;
-		data->philos[i].fork.right = (i + 1) % data->philo_nb;
+		if (data->philos[i].philo_id % 2 == 0)
+		{
+			data->philos[i].fork.left = i;
+			data->philos[i].fork.right = (i + 1) % data->philo_nb;
+		}
+		else
+		{
+			data->philos[i].fork.left = (i + 1) % data->philo_nb;
+			data->philos[i].fork.right = i;
+		}
 		data->philos[i].time_philolastmeal = 0;
 		data->philos[i].philo_data = data;
 	}

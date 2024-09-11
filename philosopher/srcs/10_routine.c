@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 17:56:02 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/10 19:30:33 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/11 17:33:29 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ void	*philo_routine(void *arg)
 		sleep_philo(philo);
 		think_philo(philo);
 	}
-	// pthread_mutex_lock(&philo->monitoring->mutex_print);
-	// printf("\nphilosophe %d eat : %d/%d\n", philo->id, philo->meal_eaten, philo->monitoring->nb_meal);
-	// pthread_mutex_unlock(&philo->monitoring->mutex_print);
 	return (NULL);
 }
 
