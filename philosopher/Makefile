@@ -9,12 +9,10 @@ CFLAGS = -Wall -Wextra -Werror -g -pthread
 INCLUDES_DIR = includes
 
 # Fichiers sources
-SRCS =	srcs/00_utils.c \
-		srcs/01_init.c \
-		srcs/02_free.c \
-		srcs/03_print.c \
-		srcs/10_routine.c \
-		srcs/11_routine.c \
+SRCS =	00_utils.c \
+		01_check.c \
+		02_initandfree.c \
+		03_routine.c \
 		main.c
 
 # Convertir les fichiers .c en fichiers .o

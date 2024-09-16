@@ -6,7 +6,7 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 19:48:49 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/11 01:58:11 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/16 12:52:16 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,25 @@ typedef struct s_data
 	t_philo			*philos;
 }			t_data;
 
-void		check_arguments(int argc, char **argv);
-int			ft_atoi(const char *str);
-void		init_mutex(t_data *data);
-void		ft_error(char *str);
-void		init(t_data *data);
-void		eat_philo(t_philo *philo);
-void		end_sim(t_data *data);
-long long	get_time(void);
-void		*routine(void *routine);
-void		is_dead(t_data *data, t_philo *ph);
-void		sleep_time(long long time, t_data *data);
+//00
 void		print_status(t_data *data, int nb, char *msg);
+long long	get_time(void);
+void		ft_error(char *str);
+int			ft_atoi(const char *str);
+//01
+void		check_arguments(int argc, char **argv);
+void		check_eatdeath(int i, t_data *data, t_philo *ph);
+void		is_dead(t_data *data, t_philo *ph);
 int			check_value(int argc, char **argv);
+//02
+void		init(t_data *data);
 void		init_data(int argc, char **argv, t_data *data);
+void		init_mutex(t_data *data);
+void		end_sim(t_data *data);
+//03
+void		*routine(void *routine);
+void		eat_philo(t_philo *philo);
+void		sleep_time(long long time, t_data *data);
 
 
 #endif
