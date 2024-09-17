@@ -47,7 +47,7 @@ Exécutez le programme avec les arguments souhaités (par exemple) :
 
 Le programme accepte les arguments suivants :
 
-    ./philo [nombre de philosophes] [temps avant la faim] [temps pour manger] [temps pour dormir] [nombre de repas (optionnel)]
+./philo [nombre de philosophes] [temps avant la faim] [temps pour manger] [temps pour dormir] [nombre de repas (optionnel)]
 
 Exemple :
 
@@ -56,11 +56,11 @@ Exemple :
 ./philo 5 800 200 200 5
 ```
 
-    nombre de philosophes : Le nombre de philosophes à simuler.
-    temps avant la faim : Le temps en millisecondes qu'un philosophe peut attendre avant de devoir manger.
-    temps pour manger : Le temps en millisecondes qu'un philosophe met pour manger.
-    temps pour dormir : Le temps en millisecondes qu'un philosophe met pour dormir.
-    nombre de repas (optionnel) : Le nombre de repas qu'un philosophe doit consommer avant la fin de la simulation.
+nombre de philosophes : Le nombre de philosophes à simuler.
+temps avant la faim : Le temps en millisecondes qu'un philosophe peut attendre avant de devoir manger.
+temps pour manger : Le temps en millisecondes qu'un philosophe met pour manger.
+temps pour dormir : Le temps en millisecondes qu'un philosophe met pour dormir.
+nombre de repas (optionnel) : Le nombre de repas qu'un philosophe doit consommer avant la fin de la simulation.
 
 Si le dernier paramètre n'est pas fourni, la simulation continue jusqu'à ce qu'un philosophe meure.
 Exemple d'exécution
@@ -81,6 +81,6 @@ Contributeurs
 
 [Adrien Cabarbaye](https://github.com/Demiaeuw)
 
-Licence
+## Licence
 
 Ce projet est sous la licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus d'informations.
