@@ -79,7 +79,7 @@ Philosophe 3 dort.
 Le projet n'utilise aucune bibliothèque externe en dehors des bibliothèques standard du C.
 Contributeurs
 
-    [Adrien Cabarbaye](https://github.com/Demiaeuw)
+[Adrien Cabarbaye](https://github.com/Demiaeuw)
 
 Licence
 
