@@ -15,28 +15,28 @@ Fonctionnalités
 
 Pour compiler et exécuter ce projet, vous devez disposer de make et de gcc installés sur votre machine.
 
-Clonez le dépôt :
+1. Clonez le dépôt :
 
 ```bash
 
 git clone https://github.com/Demiaeuw/42_philosophers.git
 ```
 
-Accédez au répertoire du projet :
+2. Accédez au répertoire du projet :
 
 ```bash
 
 cd 42_philosophers
 ```
 
-Compilez le projet en utilisant make :
+3. Compilez le projet en utilisant make :
 
 ```bash
 
 make
 ```
 
-Exécutez le programme avec les arguments souhaités (par exemple) :
+4. Exécutez le programme avec les arguments souhaités (par exemple) :
 
 ```bash
 
@@ -77,7 +77,8 @@ Philosophe 3 dort.
 ## Dépendances
 
 Le projet n'utilise aucune bibliothèque externe en dehors des bibliothèques standard du C.
-Contributeurs
+
+## Contributeurs
 
 [Adrien Cabarbaye](https://github.com/Demiaeuw)
 
