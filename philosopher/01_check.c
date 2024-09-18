@@ -6,21 +6,28 @@
 /*   By: acabarba <acabarba@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 20:12:44 by acabarba          #+#    #+#             */
-/*   Updated: 2024/09/11 02:20:28 by acabarba         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:23:31 by acabarba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	check_arguments(int argc, char **argv)
+void	check_arguments(int ac, char **av)
 {
-	if (argc < 5 || argc > 6)
+	if (ac < 5 || ac > 6)
 		ft_error("Error, program needs 5 or 6 args");
-	if (!check_value(argc, argv))
+	if (!check_value(ac, av))
 		ft_error("Error, args are not digit");
-	if (ft_atoi(argv[1]) <= 0 || ft_atoi(argv[2]) <= 0
-		|| ft_atoi(argv[3]) <= 0 || ft_atoi(argv[4]) <= 0)
+	if (ft_atoi(av[1]) <= 0 || ft_atoi(av[2]) <= 0
+		|| ft_atoi(av[3]) <= 0 || ft_atoi(av[4]) <= 0)
 		ft_error("Error, args not positive");
+	if (ft_atoi(av[1]) == 1)
+	{
+		printf("%4d 1 has taken fork\n", 1);
+		usleep(ft_atoi(av[2]) * 1000);
+		printf("%4d 1 is dead\n", (ft_atoi(av[2]) + 1));
+		exit(0);
+	}
 }
 
 void	check_eatdeath(int i, t_data *data, t_philo *ph)
@@ -63,18 +70,18 @@ void	is_dead(t_data *data, t_philo *ph)
 	}
 }
 
-int	check_value(int argc, char **argv)
+int	check_value(int ac, char **av)
 {
 	int	i;
 	int	j;
 
 	i = 1;
-	while (i < argc)
+	while (i < ac)
 	{
 		j = 0;
-		while (argv[i][j])
+		while (av[i][j])
 		{
-			if (argv[i][j] < '0' || argv[i][j] > '9')
+			if (av[i][j] < '0' || av[i][j] > '9')
 				return (0);
 			j++;
 		}
